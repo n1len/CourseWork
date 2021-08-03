@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CourseWork.Infrastructure.Models.User>
+
+<h2>Список пользователей</h2>
+<form method="post">
+    <div class="text-left">
+        <button type="submit" class="btn btn-outline-dark" formmethod="post"
+                asp-action="Block">
+            Block
+        </button>
+        <button type="submit" class="btn btn-outline-dark" formmethod="post"
+                asp-action="Unblock">
+            <i class="fas fa-unlock-alt"></i>
+        </button>
+        <button type="submit" class="btn btn-outline-dark" formmethod="post"
+                asp-action="DeleteUser">
+            <i class="fas fa-user-minus"></i>
+        </button>
+    </div>
+    
+    
+    <div class="text-center mt-2 table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col" class="text-left">
+                    <input type="checkbox" id="tableCheckBox" />
+                    Выделить всё / Снять выделение
+                </th>
+                <th scope="col">
+                    Логин
+                </th>
+                <th scope="col">
+                    Статус
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="text-left">
+                        <input type="checkbox" value="@user.Id" name="usersIds" class="custom-checkbox" />
+                    </td>
+                    <td>
+                        @user.UserName
+                    </td>
+                    <td>
+                        @if (!user.IsBlocked)
+                        {
+                            <p>Не заблокирован</p>
+                        }
+                        else
+                        {
+                            <p>Заблокирован</p>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-userid="@user.Id">Права доступа</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" asp-controller="Admin">
+        <button type="submit" class="btn btn-outline-dark">
+            Просмотреть список ролей
+        </button>
+    </a>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("tableCheckBox").onclick = function checkAll(event) {
+        const elements = document.getElementsByClassName("custom-checkbox");
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].checked = event.target.checked;
+        }
+    };
+</script>

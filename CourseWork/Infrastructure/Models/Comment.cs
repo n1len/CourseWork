@@ -8,6 +8,8 @@ namespace CourseWork.Infrastructure.Models
         public string Description { get; set; }
         public int ItemId { get; set; }
         public Item Item { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
         public ICollection<Like> Likes { get; set; }
     }
 }

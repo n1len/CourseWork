@@ -34,7 +34,7 @@ namespace CourseWork.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { UserName = model.UserName, Email = model.Email};
+                User user = new User { UserName = model.UserName, Email = model.Email, IsBlocked = false};
                 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -63,7 +63,12 @@ namespace CourseWork.Controllers
                 var result =
                     await _signInManager.PasswordSignInAsync(model.UserName, model.Password,false,false);
                 if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
+                {
+                    if((await _userManager.FindByNameAsync(model.UserName)).IsBlocked != true) 
+                        return RedirectToAction("Index", "Home");
+                    else
+                        ModelState.AddModelError("", "Аккаунт заблокирован");
+                }
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
             }

@@ -9,7 +9,7 @@ namespace CourseWork.ViewModels
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Поле не может быть пустым.")]
-        public string Name { get; set; }
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Поле не может быть пустым.")]
         [DataType(DataType.EmailAddress)]

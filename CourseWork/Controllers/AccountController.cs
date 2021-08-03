@@ -23,12 +23,18 @@ namespace CourseWork.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                User user = new User { UserName = model.Name, Email = model.Email};
+                User user = new User { UserName = model.UserName, Email = model.Email};
                 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -48,12 +54,6 @@ namespace CourseWork.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -61,7 +61,7 @@ namespace CourseWork.Controllers
             if (ModelState.IsValid)
             {
                 var result =
-                    await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
+                    await _signInManager.PasswordSignInAsync(model.UserName, model.Password,false,false);
                 if (result.Succeeded)
                     return RedirectToAction("Index", "Home");
                 else
@@ -70,8 +70,7 @@ namespace CourseWork.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

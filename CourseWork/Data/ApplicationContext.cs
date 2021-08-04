@@ -28,5 +28,7 @@ namespace CourseWork.Data
         public DbSet<User> Users { get; set; }
 
         public DbSet<CustomCollection> CustomCollection { get; set; }
+
+        public DbSet<CourseWork.Infrastructure.Models.Item> Item { get; set; }
     }
 }

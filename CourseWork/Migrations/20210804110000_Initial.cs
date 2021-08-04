@@ -178,15 +178,14 @@ namespace CourseWork.Migrations
                     IsCheckBox1Visible = table.Column<bool>(nullable: false),
                     IsCheckBox2Visible = table.Column<bool>(nullable: false),
                     IsCheckBox3Visible = table.Column<bool>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CustomCollection", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomCollection_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_CustomCollection_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -236,8 +235,7 @@ namespace CourseWork.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(nullable: true),
                     ItemId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -249,8 +247,8 @@ namespace CourseWork.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Comment_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Comment_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -264,8 +262,7 @@ namespace CourseWork.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<long>(nullable: false),
                     CommentId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -277,8 +274,8 @@ namespace CourseWork.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Like_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Like_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -329,14 +326,14 @@ namespace CourseWork.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_UserId1",
+                name: "IX_Comment_UserId",
                 table: "Comment",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomCollection_UserId1",
+                name: "IX_CustomCollection_UserId",
                 table: "CustomCollection",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Item_CustomCollectionId",
@@ -349,9 +346,9 @@ namespace CourseWork.Migrations
                 column: "CommentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Like_UserId1",
+                name: "IX_Like_UserId",
                 table: "Like",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

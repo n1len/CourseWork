@@ -1,0 +1,126 @@
+﻿@model CourseWork.Infrastructure.Models.Item
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tags)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tags)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumericField1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumericField1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumericField2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumericField2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumericField3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumericField3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OneLineField1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OneLineField1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OneLineField2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OneLineField2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OneLineField3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OneLineField3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TextField1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TextField1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TextField2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TextField2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TextField3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TextField3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CheckBox1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CheckBox1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CheckBox2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CheckBox2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CheckBox3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CheckBox3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomCollection)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomCollection.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

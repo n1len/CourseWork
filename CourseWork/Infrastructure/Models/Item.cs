@@ -26,5 +26,6 @@ namespace CourseWork.Infrastructure.Models
         public int CustomCollectionId { get; set; }
         public CustomCollection CustomCollection { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<Like> Likes { get; set; }
     }
 }

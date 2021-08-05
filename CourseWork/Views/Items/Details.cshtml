@@ -1,4 +1,4 @@
-﻿@model CourseWork.Infrastructure.Models.Item
+﻿@model CourseWork.ViewModels.ItemViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,116 +11,163 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Item.Title)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Item.Title)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tags)
+            @Html.DisplayNameFor(model => model.Item.Tags)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tags)
+            @Html.DisplayFor(model => model.Item.Tags)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumericField1)
+            @Html.DisplayNameFor(model => model.Item.NumericField1)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumericField1)
+            @Html.DisplayFor(model => model.Item.NumericField1)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumericField2)
+            @Html.DisplayNameFor(model => model.Item.NumericField2)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumericField2)
+            @Html.DisplayFor(model => model.Item.NumericField2)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumericField3)
+            @Html.DisplayNameFor(model => model.Item.NumericField3)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumericField3)
+            @Html.DisplayFor(model => model.Item.NumericField3)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OneLineField1)
+            @Html.DisplayNameFor(model => model.Item.OneLineField1)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OneLineField1)
+            @Html.DisplayFor(model => model.Item.OneLineField1)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OneLineField2)
+            @Html.DisplayNameFor(model => model.Item.OneLineField2)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OneLineField2)
+            @Html.DisplayFor(model => model.Item.OneLineField2)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OneLineField3)
+            @Html.DisplayNameFor(model => model.Item.OneLineField3)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OneLineField3)
+            @Html.DisplayFor(model => model.Item.OneLineField3)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TextField1)
+            @Html.DisplayNameFor(model => model.Item.TextField1)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TextField1)
+            @Html.DisplayFor(model => model.Item.TextField1)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TextField2)
+            @Html.DisplayNameFor(model => model.Item.TextField2)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TextField2)
+            @Html.DisplayFor(model => model.Item.TextField2)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TextField3)
+            @Html.DisplayNameFor(model => model.Item.TextField3)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TextField3)
+            @Html.DisplayFor(model => model.Item.TextField3)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date1)
+            @Html.DisplayNameFor(model => model.Item.Date1)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date1)
+            @Html.DisplayFor(model => model.Item.Date1)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date2)
+            @Html.DisplayNameFor(model => model.Item.Date2)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date2)
+            @Html.DisplayFor(model => model.Item.Date2)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date3)
+            @Html.DisplayNameFor(model => model.Item.Date3)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date3)
+            @Html.DisplayFor(model => model.Item.Date3)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CheckBox1)
+            @Html.DisplayNameFor(model => model.Item.CheckBox1)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckBox1)
+            @Html.DisplayFor(model => model.Item.CheckBox1)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CheckBox2)
+            @Html.DisplayNameFor(model => model.Item.CheckBox2)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckBox2)
+            @Html.DisplayFor(model => model.Item.CheckBox2)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CheckBox3)
+            @Html.DisplayNameFor(model => model.Item.CheckBox3)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckBox3)
+            @Html.DisplayFor(model => model.Item.CheckBox3)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustomCollection)
+            @Html.DisplayNameFor(model => model.Item.CustomCollection)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CustomCollection.Id)
+            @Html.DisplayFor(model => model.Item.CustomCollection.Id)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <h3>Комментарии(@Model.Comments.Count()):</h3>
+    @if (Model.Comments.Any())
+    {
+        @foreach (var item in Model.Comments)
+        {
+            <div class="comment">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h4>@item.User.UserName</h4>
+                        <p><i>@item.Description</i></p>
+                    </div>
+                    <div class="col">
+                        <p class="text-right"></p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <div class="col">
+                <p><i style="font-size: 20px">Оставьте первый комментарий</i></p>
+            </div>
+        </div>
+    }
+</div>
+<form asp-action="Details" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h5><i>Добавить комментарий:</i></h5>
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="form-group">
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" asp-route-id="@Model.Item.Id">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Item.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
 </div>

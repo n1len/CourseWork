@@ -69,3 +69,23 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.comment {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: solid 1px;
+    border-radius: 25px;
+}
+
+.comment p {
+    margin: 10px;
+    font-family: Verdana, sans-serif;
+    font-size: 17px;
+}
+
+.comment h4 {
+    margin: 10px;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+}

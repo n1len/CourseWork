@@ -35,5 +35,17 @@ namespace CourseWork.Data
 
             context.SaveChanges();
         }
+
+        public static async void CreateComment(ApplicationContext context, string description, int id,string userId)
+        {
+            await context.AddAsync(new Comment
+            {
+                Description = description,
+                ItemId = id,
+                UserId = userId
+            });
+
+            context.SaveChanges();
+        }
     }
 }

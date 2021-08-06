@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
 using CourseWork.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CourseWork.Controllers
 {
@@ -46,12 +48,12 @@ namespace CourseWork.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Details(int id,ItemViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                var userId = user.Id;
+                var userId = await GetUserId();
                 DbObjects.CreateComment(_context, model.Description, id, userId);
             }
 
@@ -73,6 +75,36 @@ namespace CourseWork.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(item);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> LikeComment(int id,int itemId)
+        {
+            var userId = await GetUserId();
+            var like = await _context.LikeOnComment.FirstOrDefaultAsync(i => i.CommentId == id && i.UserId == userId);
+
+            if (like == null)
+                DbObjects.LikeComment(_context, id, userId);
+            else
+                ChangeLikeState(like);
+
+            return RedirectToAction("Details",new {id = itemId});
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> LikeItem(int id)
+        {
+            var userId = await GetUserId();
+            var like = await _context.LikeOnItem.FirstOrDefaultAsync(i => i.ItemId == id && i.UserId == userId);
+
+            if (like == null)
+                DbObjects.LikeItem(_context, id, userId);
+            else
+                ChangeLikeState(like);
+
+            return RedirectToAction("Details", new {id = id});
         }
 
         public async Task<IActionResult> Edit(int? id)
@@ -154,16 +186,43 @@ namespace CourseWork.Controllers
 
             var comments = _context.Comment
                 .Include(u => u.User)
+                .Include(l => l.Likes)
                 .Include(i => i.Item)
                 .Where(m => m.ItemId == id);
+
+            var likes = _context.LikeOnItem.Where(m => m.ItemId == id);
 
             var itemViewModel = new ItemViewModel
             {
                 Item = item,
-                Comments = comments
+                Comments = comments,
+                LikesOnItem = likes
             };
 
             return itemViewModel;
+        }
+
+        private async Task<string> GetUserId()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var userId = user.Id;
+            return userId;
+        }
+
+        private void ChangeLikeState(LikeOnComment like)
+        {
+            like.IsLiked = like.IsLiked ? like.IsLiked = false : like.IsLiked = true;
+
+            _context.Update(like);
+            _context.SaveChanges();
+        }
+
+        private void ChangeLikeState(LikeOnItem like)
+        {
+            like.IsLiked = like.IsLiked ? like.IsLiked = false : like.IsLiked = true;
+
+            _context.Update(like);
+            _context.SaveChanges();
         }
     }
 }

@@ -32,5 +32,9 @@ namespace CourseWork.Data
         public DbSet<Item> Item { get; set; }
 
         public DbSet<Comment> Comment { get; set; }
+
+        public DbSet<LikeOnComment> LikeOnComment { get; set; }
+
+        public DbSet<LikeOnItem> LikeOnItem { get; set; }
     }
 }

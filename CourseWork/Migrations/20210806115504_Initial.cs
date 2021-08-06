@@ -255,26 +255,53 @@ namespace CourseWork.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Like",
+                name: "LikeOnItem",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<long>(nullable: false),
+                    IsLiked = table.Column<bool>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LikeOnItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LikeOnItem_Item_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Item",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LikeOnItem_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LikeOnComment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsLiked = table.Column<bool>(nullable: false),
                     CommentId = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Like", x => x.Id);
+                    table.PrimaryKey("PK_LikeOnComment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Like_Comment_CommentId",
+                        name: "FK_LikeOnComment_Comment_CommentId",
                         column: x => x.CommentId,
                         principalTable: "Comment",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Like_AspNetUsers_UserId",
+                        name: "FK_LikeOnComment_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -341,13 +368,23 @@ namespace CourseWork.Migrations
                 column: "CustomCollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Like_CommentId",
-                table: "Like",
+                name: "IX_LikeOnComment_CommentId",
+                table: "LikeOnComment",
                 column: "CommentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Like_UserId",
-                table: "Like",
+                name: "IX_LikeOnComment_UserId",
+                table: "LikeOnComment",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LikeOnItem_ItemId",
+                table: "LikeOnItem",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LikeOnItem_UserId",
+                table: "LikeOnItem",
                 column: "UserId");
         }
 
@@ -369,7 +406,10 @@ namespace CourseWork.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Like");
+                name: "LikeOnComment");
+
+            migrationBuilder.DropTable(
+                name: "LikeOnItem");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

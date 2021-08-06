@@ -7,115 +7,144 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Item</h4>
-    <hr />
+    <div class="row">
+        <div class="col-sm-10">
+            <h4>Item</h4>
+        </div>
+        <div class="col text-right">
+            <form asp-controller="Items">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button type="submit" class="btn btn-primary" asp-route-id="@Model.Item.Id"
+                            formmethod="post" asp-action="LikeItem">
+                        <i class="far fa-heart"></i>
+                        @if (Model.LikesOnItem.Any(c => c.IsLiked))
+                        {
+                            @Model.LikesOnItem.Count(c => c.IsLiked)
+                        }
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary" disabled="disabled">
+                        <i class="far fa-heart"></i>
+                        @if (Model.LikesOnItem.Any(c => c.IsLiked))
+                        {
+                            @Model.LikesOnItem.Count(c => c.IsLiked)
+                        }
+                    </button>
+                }
+            </form>
+        </div>
+    </div>
+    <hr/>
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.Tags)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.Tags)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.NumericField1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.NumericField1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.NumericField2)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.NumericField2)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.NumericField3)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.NumericField3)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.OneLineField1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.OneLineField1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.OneLineField2)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.OneLineField2)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.OneLineField3)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.OneLineField3)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.TextField1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.TextField1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.TextField2)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.TextField2)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.TextField3)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.TextField3)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.Date1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.Date1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.Date2)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.Date2)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.Date3)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.Date3)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.CheckBox1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.CheckBox1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.CheckBox2)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.CheckBox2)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.CheckBox3)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.CheckBox3)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Item.CustomCollection)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.CustomCollection.Id)
         </dd>
     </dl>
@@ -128,12 +157,34 @@
         {
             <div class="comment">
                 <div class="row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                         <h4>@item.User.UserName</h4>
                         <p><i>@item.Description</i></p>
                     </div>
-                    <div class="col">
-                        <p class="text-right"></p>
+                    <div class="col text-right">
+                        <form asp-controller="Items">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <button type="submit" class="btn btn-primary" asp-route-id="@item.Id" asp-route-itemId="@item.ItemId"
+                                        formmethod="post" asp-action="LikeComment" style="margin-right: 25px; margin-top: 30px;">
+                                    <i class="far fa-heart"></i>
+                                    @if (item.Likes.Any(c => c.IsLiked))
+                                    {
+                                        @item.Likes.Count(c => c.IsLiked)
+                                    }
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary" disabled="disabled" style="margin-right: 25px; margin-top: 30px;">
+                                    <i class="far fa-heart"></i>
+                                    @if (item.Likes.Any(c => c.IsLiked))
+                                    {
+                                        @item.Likes.Count(c => c.IsLiked)
+                                    }
+                                </button>
+                            }
+                        </form>
                     </div>
                 </div>
             </div>
@@ -173,7 +224,7 @@
 else
 {
     <div>
-        <h5><i>Возможность оставлять комментарии доступна только авторизованным пользователям</i></h5>
+        <h5><i>Возможность оставлять и лайкать комментарии/айтемы доступна только авторизованным пользователям</i></h5>
     </div>
 }
 

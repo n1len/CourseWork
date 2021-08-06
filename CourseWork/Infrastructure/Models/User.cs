@@ -8,7 +8,8 @@ namespace CourseWork.Infrastructure.Models
     {
         public bool IsBlocked { get; set; }
         public ICollection<Comment> Comments { get; set; }
-        public ICollection<Like> Likes { get; set; }
+        public ICollection<LikeOnComment> LikeOnComments { get; set; }
+        public ICollection<LikeOnItem> LikeOnItems{ get; set; }
         public ICollection<CustomCollection> CustomCollections { get; set; }
     }
 }

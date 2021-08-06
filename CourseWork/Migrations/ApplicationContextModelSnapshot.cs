@@ -186,18 +186,18 @@ namespace CourseWork.Migrations
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("CourseWork.Infrastructure.Models.Like", b =>
+            modelBuilder.Entity("CourseWork.Infrastructure.Models.LikeOnComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("Amount")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("CommentId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsLiked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -208,7 +208,32 @@ namespace CourseWork.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Like");
+                    b.ToTable("LikeOnComment");
+                });
+
+            modelBuilder.Entity("CourseWork.Infrastructure.Models.LikeOnItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsLiked")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LikeOnItem");
                 });
 
             modelBuilder.Entity("CourseWork.Infrastructure.Models.User", b =>
@@ -439,7 +464,7 @@ namespace CourseWork.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CourseWork.Infrastructure.Models.Like", b =>
+            modelBuilder.Entity("CourseWork.Infrastructure.Models.LikeOnComment", b =>
                 {
                     b.HasOne("CourseWork.Infrastructure.Models.Comment", "Comment")
                         .WithMany("Likes")
@@ -448,7 +473,20 @@ namespace CourseWork.Migrations
                         .IsRequired();
 
                     b.HasOne("CourseWork.Infrastructure.Models.User", "User")
+                        .WithMany("LikeOnComments")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CourseWork.Infrastructure.Models.LikeOnItem", b =>
+                {
+                    b.HasOne("CourseWork.Infrastructure.Models.Item", "Item")
                         .WithMany("Likes")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CourseWork.Infrastructure.Models.User", "User")
+                        .WithMany("LikeOnItems")
                         .HasForeignKey("UserId");
                 });
 

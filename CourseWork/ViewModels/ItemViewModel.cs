@@ -13,5 +13,6 @@ namespace CourseWork.ViewModels
         [Required(ErrorMessage = "Комментарий не может быть пустым")]
         public string Description { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
+        public IEnumerable<LikeOnItem> LikesOnItem { get; set; }
     }
 }

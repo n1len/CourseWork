@@ -16,12 +16,19 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <button type="submit" class="btn btn-primary" asp-route-id="@Model.Item.Id"
-                            formmethod="post" asp-action="LikeItem">
-                        <i class="far fa-heart"></i>
-                        @if (Model.LikesOnItem.Any(c => c.IsLiked))
+                        formmethod="post" asp-action="LikeItem">
+                        @if (Model.LikesOnItem.Any(c => c.UserName == User.Identity.Name && c.IsLiked))
                         {
-                            @Model.LikesOnItem.Count(c => c.IsLiked)
+                            <i class="fas fa-heart"></i>
                         }
+                        else
+                        {
+                            <i class="far fa-heart"></i>
+                        }
+                            @if (Model.LikesOnItem.Any(c => c.IsLiked))
+                            {
+                                @Model.LikesOnItem.Count(c => c.IsLiked)
+                            }
                     </button>
                 }
                 else
@@ -167,7 +174,14 @@
                             {
                                 <button type="submit" class="btn btn-primary" asp-route-id="@item.Id" asp-route-itemId="@item.ItemId"
                                         formmethod="post" asp-action="LikeComment" style="margin-right: 25px; margin-top: 30px;">
-                                    <i class="far fa-heart"></i>
+                                    @if (item.Likes.Any(c => c.UserName == User.Identity.Name && c.IsLiked))
+                                    {
+                                        <i class="fas fa-heart"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-heart"></i>
+                                    }
                                     @if (item.Likes.Any(c => c.IsLiked))
                                     {
                                         @item.Likes.Count(c => c.IsLiked)

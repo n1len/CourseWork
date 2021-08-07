@@ -48,24 +48,26 @@ namespace CourseWork.Data
             context.SaveChanges();
         }
 
-        public static async void LikeComment(ApplicationContext context,int id, string userId)
+        public static async void LikeComment(ApplicationContext context,int id, string userId,string userName)
         {
             await context.AddAsync(new LikeOnComment
             {
                 IsLiked = true,
                 CommentId = id,
+                UserName = userName,
                 UserId = userId
             });
 
             context.SaveChanges();
         }
 
-        public static async void LikeItem(ApplicationContext context, int id, string userId)
+        public static async void LikeItem(ApplicationContext context, int id, string userId,string userName)
         {
             await context.AddAsync(new LikeOnItem()
             {
                 IsLiked = true,
                 ItemId = id,
+                UserName = userName,
                 UserId = userId
             });
 

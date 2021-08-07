@@ -178,6 +178,18 @@ namespace CourseWork.Migrations
                     IsCheckBox1Visible = table.Column<bool>(nullable: false),
                     IsCheckBox2Visible = table.Column<bool>(nullable: false),
                     IsCheckBox3Visible = table.Column<bool>(nullable: false),
+                    NumericField1 = table.Column<string>(nullable: true),
+                    NumericField2 = table.Column<string>(nullable: true),
+                    NumericField3 = table.Column<string>(nullable: true),
+                    OneLineField1 = table.Column<string>(nullable: true),
+                    OneLineField2 = table.Column<string>(nullable: true),
+                    OneLineField3 = table.Column<string>(nullable: true),
+                    TextField1 = table.Column<string>(nullable: true),
+                    TextField2 = table.Column<string>(nullable: true),
+                    TextField3 = table.Column<string>(nullable: true),
+                    Date1 = table.Column<string>(nullable: true),
+                    Date2 = table.Column<string>(nullable: true),
+                    Date3 = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -262,6 +274,7 @@ namespace CourseWork.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsLiked = table.Column<bool>(nullable: false),
                     ItemId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -289,6 +302,7 @@ namespace CourseWork.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsLiked = table.Column<bool>(nullable: false),
                     CommentId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

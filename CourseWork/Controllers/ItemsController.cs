@@ -82,10 +82,11 @@ namespace CourseWork.Controllers
         public async Task<IActionResult> LikeComment(int id,int itemId)
         {
             var userId = await GetUserId();
+            var userName = await GetUserName();
             var like = await _context.LikeOnComment.FirstOrDefaultAsync(i => i.CommentId == id && i.UserId == userId);
 
             if (like == null)
-                DbObjects.LikeComment(_context, id, userId);
+                DbObjects.LikeComment(_context, id, userId,userName);
             else
                 ChangeLikeState(like);
 
@@ -97,10 +98,11 @@ namespace CourseWork.Controllers
         public async Task<IActionResult> LikeItem(int id)
         {
             var userId = await GetUserId();
+            var userName = await GetUserName();
             var like = await _context.LikeOnItem.FirstOrDefaultAsync(i => i.ItemId == id && i.UserId == userId);
 
             if (like == null)
-                DbObjects.LikeItem(_context, id, userId);
+                DbObjects.LikeItem(_context, id, userId,userName);
             else
                 ChangeLikeState(like);
 
@@ -207,6 +209,13 @@ namespace CourseWork.Controllers
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var userId = user.Id;
             return userId;
+        }
+
+        private async Task<string> GetUserName()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var userName = user.UserName;
+            return userName;
         }
 
         private void ChangeLikeState(LikeOnComment like)

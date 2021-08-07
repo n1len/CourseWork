@@ -51,6 +51,15 @@ namespace CourseWork.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Date1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date3")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -101,6 +110,33 @@ namespace CourseWork.Migrations
 
                     b.Property<bool>("IsTextField3Visible")
                         .HasColumnType("bit");
+
+                    b.Property<string>("NumericField1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumericField2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NumericField3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OneLineField1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OneLineField2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OneLineField3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextField1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextField2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextField3")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -202,6 +238,9 @@ namespace CourseWork.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CommentId");
@@ -226,6 +265,9 @@ namespace CourseWork.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

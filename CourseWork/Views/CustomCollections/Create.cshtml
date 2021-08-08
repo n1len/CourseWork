@@ -4,9 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>CustomCollection</h4>
+<h4 class="text-center">Окно создания новой коллекции</h4>
 <hr />
 <div class="row">
     <form asp-action="Create">
@@ -304,11 +302,9 @@
         </div>
     </form>
     <div class="text-center">
-        <a asp-action="Index">К списку коллекций</a>
+        <a asp-controller="Account" asp-action="Personal">В личный кабинет</a>
     </div>
 </div>
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

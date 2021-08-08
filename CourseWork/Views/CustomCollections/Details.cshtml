@@ -4,228 +4,404 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>CustomCollection</h4>
-    <div class="col-sm-10">
-        <a asp-controller="Items" asp-action="Create" asp-route-id="@Model.Id">Create item</a> |
+    <h4 class="text-center">Подробная информация о коллекции "@Model.Title"</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="text-right">
+                <a asp-controller="Items" asp-action="Create" asp-route-id="@Model.Id">Создать айтем</a>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <a asp-controller="Items" asp-action="Index" asp-route-id="@Model.Id">Перейти к списку всех айтемов коллекции</a>
+            </div>
+        </div>
     </div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
+        <dt class="col-sm-6 text-right">
+            <i>@Html.DisplayNameFor(model => model.Title)</i>
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class="col-sm-6 text-right">
+            <i>@Html.DisplayNameFor(model => model.Description)</i>
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Topic)
+        <dt class="col-sm-6 text-right">
+            <i>@Html.DisplayNameFor(model => model.Topic)</i>
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Topic)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Img)
+        <dt class="col-sm-6 text-right">
+            <i>@Html.DisplayNameFor(model => model.Img)</i>
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-6">
             @Html.DisplayFor(model => model.Img)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsNumericField1Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsNumericField1Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsNumericField2Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsNumericField2Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsNumericField3Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsNumericField3Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsOneLineField1Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsOneLineField1Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsOneLineField2Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsOneLineField2Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsOneLineField3Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsOneLineField3Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsTextField1Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsTextField1Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsTextField2Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsTextField2Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsTextField3Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsTextField3Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsDate1Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsDate1Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsDate2Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsDate2Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsDate3Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsDate3Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsCheckBox1Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCheckBox1Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsCheckBox2Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCheckBox2Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsCheckBox3Visible)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsCheckBox3Visible)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumericField1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumericField1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumericField2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumericField2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumericField3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumericField3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OneLineField1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OneLineField1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OneLineField2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OneLineField2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OneLineField3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OneLineField3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TextField1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TextField1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TextField2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TextField2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TextField3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TextField3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CheckBox1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckBox1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CheckBox2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckBox2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CheckBox3)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CheckBox3)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.UserName)
-        </dd>
     </dl>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <b>Название поля:</b>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.IsNumericField1Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Первое числовое поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.NumericField1</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Первое числовое поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsNumericField2Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Второе числовое поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.NumericField2</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Второе числовое поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsNumericField3Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Третье числовое поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.NumericField3</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Третье числовое поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <b>Название поля:</b>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.IsOneLineField1Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Первое однострочное поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.OneLineField1</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Первое однострочное поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsOneLineField2Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Второе однострочное поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.OneLineField2</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Второе однострочное поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsOneLineField3Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Третье однострочное поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.OneLineField3</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Третье однострочное поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <b>Название поля:</b>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.IsTextField1Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Первое текстовое поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.TextField1</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Первое текстовое поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsTextField2Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Второе текстовое поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.TextField2</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Второе текстовое поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsTextField3Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Третье текстовое поле активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.TextField3</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Третье текстовое поле не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <b>Название поля:</b>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.IsDate1Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Первое поле с датой активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.Date1</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Первое поле с датой не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsDate2Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Второе поле с датой активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.Date2</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Второе поле с датой не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsDate3Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Третье поле с датой активированно</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.Date3</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Третье поле с датой не активированно</i></b></p>
+            </div>
+        }
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <b>Название поля:</b>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.IsCheckBox1Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Первый checkbox активирован</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.CheckBox1</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Первый checkbox не активирован</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsCheckBox2Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Второй checkbox активирован</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.CheckBox2</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Второй checkbox не активирован</i></b></p>
+            </div>
+        }
+    </div>
+    <div class="row">
+        @if (Model.IsCheckBox3Visible)
+        {
+            <div class="col-sm-6">
+                <div class="form-group form-check text-right">
+                    <p><b><i>Третий checkbox активирован</i></b></p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <p>@Model.CheckBox3</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-sm-12 text-center">
+                <p><b><i>Третий checkbox не активирован</i></b></p>
+            </div>
+        }
+    </div>
+    <hr />
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="form-group text-center">
+    <a asp-controller="Account" asp-action="Personal">В личный кабинет</a>
 </div>

@@ -88,10 +88,12 @@ namespace CourseWork.Controllers
 
         public async Task<IActionResult> Personal()
         {
-            var userModel = await _userManager.FindByNameAsync(User.Identity.Name);
-            var userId = userModel.Id;
+            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var userId = currentUser.Id;
 
-            var user = await _context.Users.FirstOrDefaultAsync(i => i.Id == userId);
+            var user = await _context.Users
+                .Include(u => u.CustomCollections)
+                .FirstOrDefaultAsync(i => i.Id == userId);
 
             return View(user);
         }

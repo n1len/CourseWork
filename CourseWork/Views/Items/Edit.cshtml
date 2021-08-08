@@ -1,4 +1,4 @@
-﻿@model CourseWork.Infrastructure.Models.Item
+﻿@model CourseWork.ViewModels.ItemViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,96 +12,141 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Item.Id" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Tags" class="form-control" />
-                <span asp-validation-for="Tags" class="text-danger"></span>
+                <label asp-for="Item.Title" class="control-label"></label>
+                <input asp-for="Item.Title" name="item.Title" class="form-control" />
+                <span asp-validation-for="Item.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumericField1" class="control-label"></label>
-                <input asp-for="NumericField1" class="form-control" />
-                <span asp-validation-for="NumericField1" class="text-danger"></span>
+                <label asp-for="Item.Tags" class="control-label"></label>
+                <input asp-for="Item.Tags" name="item.Tags" class="form-control" />
+                <span asp-validation-for="Item.Tags" class="text-danger"></span>
             </div>
+            @if (Model.CustomCollection.IsNumericField1Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.NumericField1</label>
+                    <input asp-for="Item.NumericField1" name="item.NumericField1" class="form-control" />
+                    <span asp-validation-for="Item.NumericField1" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsNumericField2Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.NumericField2</label>
+                    <input asp-for="Item.NumericField2" name="item.NumericField2" class="form-control" />
+                    <span asp-validation-for="Item.NumericField2" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsNumericField3Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.NumericField3</label>
+                    <input asp-for="Item.NumericField3" name="item.NumericField3" class="form-control" />
+                    <span asp-validation-for="Item.NumericField3" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsOneLineField1Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.OneLineField1</label>
+                    <input asp-for="Item.OneLineField1" name="item.OneLineField1" class="form-control" />
+                    <span asp-validation-for="Item.OneLineField1" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsOneLineField2Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.OneLineField2</label>
+                    <input asp-for="Item.OneLineField2" name="item.OneLineField2" class="form-control" />
+                    <span asp-validation-for="Item.OneLineField2" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsOneLineField3Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.OneLineField3</label>
+                    <input asp-for="Item.OneLineField3" name="item.OneLineField3" class="form-control" />
+                    <span asp-validation-for="Item.OneLineField3" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsTextField1Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.TextField1</label>
+                    <input asp-for="Item.TextField1" name="item.TextField1" class="form-control" />
+                    <span asp-validation-for="Item.TextField1" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsTextField2Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.TextField2</label>
+                    <input asp-for="Item.TextField2" name="item.TextField2" class="form-control" />
+                    <span asp-validation-for="Item.TextField2" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsTextField3Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.TextField3</label>
+                    <input asp-for="Item.TextField3" name="item.TextField3" class="form-control" />
+                    <span asp-validation-for="Item.TextField3" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsDate1Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.Date1</label>
+                    <input asp-for="Item.Date1" name="item.Date1" class="form-control" />
+                    <span asp-validation-for="Item.Date1" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsDate2Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.Date2</label>
+                    <input asp-for="Item.Date2" name="item.Date2" class="form-control" />
+                    <span asp-validation-for="Item.Date2" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsDate3Visible)
+            {
+                <div class="form-group">
+                    <label class="control-label">@Model.CustomCollection.Date3</label>
+                    <input asp-for="Item.Date3" name="item.Date3" class="form-control" />
+                    <span asp-validation-for="Item.Date3" class="text-danger"></span>
+                </div>
+            }
+            @if (Model.CustomCollection.IsCheckBox1Visible)
+            {
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Item.CheckBox1" name="item.CheckBox1" /> @Model.CustomCollection.CheckBox1
+                    </label>
+                </div>
+            }
+            @if (Model.CustomCollection.IsCheckBox2Visible)
+            {
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Item.CheckBox2" name="item.CheckBox2" /> @Model.CustomCollection.CheckBox2
+                    </label>
+                </div>
+            }
+            @if (Model.CustomCollection.IsCheckBox3Visible)
+            {
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Item.CheckBox3" name="item.CheckBox3" /> @Model.CustomCollection.CheckBox3
+                    </label>
+                </div>
+            }
             <div class="form-group">
-                <label asp-for="NumericField2" class="control-label"></label>
-                <input asp-for="NumericField2" class="form-control" />
-                <span asp-validation-for="NumericField2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumericField3" class="control-label"></label>
-                <input asp-for="NumericField3" class="form-control" />
-                <span asp-validation-for="NumericField3" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OneLineField1" class="control-label"></label>
-                <input asp-for="OneLineField1" class="form-control" />
-                <span asp-validation-for="OneLineField1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OneLineField2" class="control-label"></label>
-                <input asp-for="OneLineField2" class="form-control" />
-                <span asp-validation-for="OneLineField2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OneLineField3" class="control-label"></label>
-                <input asp-for="OneLineField3" class="form-control" />
-                <span asp-validation-for="OneLineField3" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TextField1" class="control-label"></label>
-                <input asp-for="TextField1" class="form-control" />
-                <span asp-validation-for="TextField1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TextField2" class="control-label"></label>
-                <input asp-for="TextField2" class="form-control" />
-                <span asp-validation-for="TextField2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TextField3" class="control-label"></label>
-                <input asp-for="TextField3" class="form-control" />
-                <span asp-validation-for="TextField3" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date1" class="control-label"></label>
-                <input asp-for="Date1" class="form-control" />
-                <span asp-validation-for="Date1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date2" class="control-label"></label>
-                <input asp-for="Date2" class="form-control" />
-                <span asp-validation-for="Date2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date3" class="control-label"></label>
-                <input asp-for="Date3" class="form-control" />
-                <span asp-validation-for="Date3" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CheckBox1" /> @Html.DisplayNameFor(model => model.CheckBox1)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CheckBox2" /> @Html.DisplayNameFor(model => model.CheckBox2)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CheckBox3" /> @Html.DisplayNameFor(model => model.CheckBox3)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomCollectionId" class="control-label"></label>
-                <select asp-for="CustomCollectionId" class="form-control" asp-items="ViewBag.CustomCollectionId"></select>
-                <span asp-validation-for="CustomCollectionId" class="text-danger"></span>
+                <label class="control-label">Название коллекции:</label>
+                <select asp-for="Item.CustomCollectionId" class="form-control" asp-items="ViewBag.CustomCollectionId"></select>
+                <span asp-validation-for="Item.CustomCollectionId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

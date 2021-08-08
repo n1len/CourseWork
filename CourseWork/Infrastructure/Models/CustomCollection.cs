@@ -1,13 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CourseWork.Infrastructure.Models
 {
     public class CustomCollection
     {
         public int Id { get; set; }
+        [Display(Name = "Название коллекции:")]
         public string Title { get; set; }
+
+        [Display(Name = "Описание:")]
         public string Description { get; set; }
+
+        [Display(Name = "Тема:")]
         public string Topic { get; set; }
+
+        [Display(Name = "Изображение:")]
         public string Img { get; set; }
         public bool IsNumericField1Visible { get; set; }
         public bool IsNumericField2Visible { get; set; }
@@ -36,6 +44,9 @@ namespace CourseWork.Infrastructure.Models
         public string Date1 { get; set; }
         public string Date2 { get; set; }
         public string Date3 { get; set; }
+        public string CheckBox1 { get; set; }
+        public string CheckBox2 { get; set; }
+        public string CheckBox3 { get; set; }
         public ICollection<Item> Items { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }

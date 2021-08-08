@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseWork.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210807112644_Initial")]
+    [Migration("20210807082721_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,15 +52,6 @@ namespace CourseWork.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CheckBox1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CheckBox2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CheckBox3")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Date1")
                         .HasColumnType("nvarchar(max)");
@@ -184,23 +175,23 @@ namespace CourseWork.Migrations
                     b.Property<int>("CustomCollectionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Date1")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Date1")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Date2")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Date2")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Date3")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Date3")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("NumericField1")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NumericField1")
+                        .HasColumnType("int");
 
-                    b.Property<string>("NumericField2")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NumericField2")
+                        .HasColumnType("int");
 
-                    b.Property<string>("NumericField3")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NumericField3")
+                        .HasColumnType("int");
 
                     b.Property<string>("OneLineField1")
                         .HasColumnType("nvarchar(max)");
@@ -224,7 +215,6 @@ namespace CourseWork.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

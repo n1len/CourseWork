@@ -60,33 +60,21 @@ namespace CourseWork.Controllers
             return RedirectToAction("Details");
         }
 
-        public async Task<IActionResult> Create(int id)
+        public IActionResult Create()
         {
-            var customCollection = await GetCustomCollection(id);
-
-            var itemViewModel = new ItemViewModel
-            {
-                CustomCollection = customCollection
-            };
-            return View(itemViewModel);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, Item item)
+        public IActionResult Create(int id, Item item)
         {
             if (ModelState.IsValid)
             {
                 DbObjects.CreateItem(_context,item,id);
                 return RedirectToAction(nameof(Index));
             }
-            var customCollection = await GetCustomCollection(id);
-            var itemViewModel = new ItemViewModel
-            {
-                Item = item,
-                CustomCollection = customCollection
-            };
-            return View(itemViewModel);
+            return View(item);
         }
 
         [HttpPost]
@@ -129,15 +117,9 @@ namespace CourseWork.Controllers
             var item = await _context.Item.FindAsync(id);
             if (item == null)
                 return NotFound();
-            var customCollection = await GetCustomCollection(item.CustomCollectionId);
-            var itemViewModel = new ItemViewModel
-            {
-                CustomCollection = customCollection,
-                Item = item
-            };
 
-            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection, "Id", "Title", item.CustomCollectionId);
-            return View(itemViewModel);
+            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection, "Id", "Id", item.CustomCollectionId);
+            return View(item);
         }
 
         [HttpPost]
@@ -163,14 +145,8 @@ namespace CourseWork.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            var customCollection = await GetCustomCollection(item.Id);
-            var itemViewModel = new ItemViewModel
-            {
-                Item = item,
-                CustomCollection = customCollection
-            };
-            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection, "Id", "Title", item.CustomCollectionId);
-            return View(itemViewModel);
+            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection, "Id", "Id", item.CustomCollectionId);
+            return View(item);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -226,13 +202,6 @@ namespace CourseWork.Controllers
             };
 
             return itemViewModel;
-        }
-
-        private async Task<CustomCollection> GetCustomCollection(int id)
-        {
-            var customCollection = await _context.CustomCollection
-                .FirstOrDefaultAsync(i => i.Id == id);
-            return customCollection;
         }
 
         private async Task<string> GetUserId()

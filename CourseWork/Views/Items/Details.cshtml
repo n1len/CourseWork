@@ -3,17 +3,20 @@
 @{
     ViewData["Title"] = "Details";
 }
+
+<h1>Details</h1>
+
 <div>
     <div class="row">
-        <div class="col-sm-11 text-center">
-            <h2>@Model.Item.Title</h2>
+        <div class="col-sm-10">
+            <h4>Item</h4>
         </div>
         <div class="col text-right">
             <form asp-controller="Items">
                 @if (User.Identity.IsAuthenticated)
                 {
                     <button type="submit" class="btn btn-primary" asp-route-id="@Model.Item.Id"
-                            formmethod="post" asp-action="LikeItem">
+                        formmethod="post" asp-action="LikeItem">
                         @if (Model.LikesOnItem.Any(c => c.UserName == User.Identity.Name && c.IsLiked))
                         {
                             <i class="fas fa-heart"></i>
@@ -22,10 +25,10 @@
                         {
                             <i class="far fa-heart"></i>
                         }
-                        @if (Model.LikesOnItem.Any(c => c.IsLiked))
-                        {
-                            @Model.LikesOnItem.Count(c => c.IsLiked)
-                        }
+                            @if (Model.LikesOnItem.Any(c => c.IsLiked))
+                            {
+                                @Model.LikesOnItem.Count(c => c.IsLiked)
+                            }
                     </button>
                 }
                 else
@@ -41,149 +44,116 @@
             </form>
         </div>
     </div>
-    <hr />
+    <hr/>
     <dl class="row">
-        <dt class="col-sm-6 text-right">
-            Тэги айтема
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Title)
         </dt>
-        <dd class="col-sm-6">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Tags)
+        </dt>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Item.Tags)
         </dd>
-        @if (Model.Item.CustomCollection.IsNumericField1Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.NumericField1
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.NumericField1)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsNumericField2Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.NumericField2
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.NumericField2)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsNumericField3Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.NumericField3
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.NumericField3)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsOneLineField1Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.OneLineField1
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.OneLineField1)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsOneLineField2Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.OneLineField2
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.OneLineField2)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsOneLineField3Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.OneLineField3
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.OneLineField3)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsTextField1Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.TextField1
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.TextField1)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsTextField2Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.TextField2
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.TextField2)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsTextField3Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.TextField3
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.TextField3)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsDate1Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.Date1
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.Date1)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsDate2Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.Date2
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.Date2)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsDate3Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.Date3
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.Date3)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsCheckBox1Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.CheckBox1
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.CheckBox1)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsCheckBox2Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.CheckBox2
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.CheckBox2)
-            </dd>
-        }
-        @if (Model.Item.CustomCollection.IsCheckBox3Visible)
-        {
-            <dt class="col-sm-6 text-right">
-                @Model.Item.CustomCollection.CheckBox3
-            </dt>
-            <dd class="col-sm-6">
-                @Html.DisplayFor(model => model.Item.CheckBox3)
-            </dd>
-        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.NumericField1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.NumericField1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.NumericField2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.NumericField2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.NumericField3)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.NumericField3)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.OneLineField1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.OneLineField1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.OneLineField2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.OneLineField2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.OneLineField3)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.OneLineField3)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.TextField1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.TextField1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.TextField2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.TextField2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.TextField3)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.TextField3)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Date1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.Date1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Date2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.Date2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Date3)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.Date3)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.CheckBox1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.CheckBox1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.CheckBox2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.CheckBox2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.CheckBox3)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.CheckBox3)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.CustomCollection)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.CustomCollection.Id)
+        </dd>
     </dl>
 </div>
 <div>

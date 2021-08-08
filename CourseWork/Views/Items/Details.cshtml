@@ -194,7 +194,7 @@
         {
             <div class="comment">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <h4>@item.User.UserName</h4>
                         <p><i>@item.Description</i></p>
                     </div>
@@ -271,8 +271,3 @@ else
         <h5><i>Возможность оставлять и лайкать комментарии/айтемы доступна только авторизованным пользователям</i></h5>
     </div>
 }
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Item.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a> |
-</div>

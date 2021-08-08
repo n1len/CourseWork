@@ -1,0 +1,46 @@
+﻿@model CourseWork.Infrastructure.Models.User
+Персональная страница пользователя <b><i>"@Model.UserName"</i></b>
+
+<h3 class="text-center">Ваши коллекции</h3>
+<hr/>
+
+@foreach (var collection in Model.CustomCollections)
+{
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Название коллекции:</i></b></p>
+        </div>
+        <div class="col">
+            <a asp-controller="CustomCollections" asp-action="Details" asp-route-id="@collection.Id">@collection.Title (Нажмите на название, чтобы перейти на страницу коллекции)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Описание коллекции:</i></b></p>
+        </div>
+        <div class="col">
+            <p>@collection.Description</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Тема:</i></b></p>
+        </div>
+        <div class="col">
+            <p>@collection.Topic</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <a asp-controller="CustomCollections" asp-action="Edit" asp-route-id="@collection.Id">
+                <button type="submit" class="btn btn-success">Изменить коллецию</button>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="CustomCollections" asp-action="Delete" asp-route-id="@collection.Id">
+                <button type="submit" class="btn btn-danger">Удалить коллекцию</button>
+            </a>
+        </div>
+    </div>
+    <hr/>
+}

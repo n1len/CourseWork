@@ -4,134 +4,41 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h3 class="text-center">Айтемы коллекции</h3>
+<hr />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tags)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumericField1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumericField2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumericField3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OneLineField1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OneLineField2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OneLineField3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TextField1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TextField2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TextField3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckBox1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckBox2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CheckBox3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomCollection)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tags)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumericField1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumericField2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumericField3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OneLineField1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OneLineField2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OneLineField3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TextField1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TextField2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TextField3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckBox1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckBox2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckBox3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomCollection.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Название айтема:</i></b></p>
+        </div>
+        <div class="col">
+            <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">@item.Title (Нажмите на название, чтобы перейти на страницу айтема)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <p><b><i>Теги:</i></b></p>
+        </div>
+        <div class="col">
+            <p>@item.Tags</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <a asp-controller="Items" asp-action="Edit" asp-route-id="@item.Id">
+                <button type="submit" class="btn btn-success">Изменить айтем</button>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Items" asp-action="Delete" asp-route-id="@item.Id">
+                <button type="submit" class="btn btn-danger">Удалить айтем</button>
+            </a>
+        </div>
+    </div>
+    <hr />
 }
-    </tbody>
-</table>
+<div class="text-center">
+    <a asp-controller="CustomCollections" asp-action="Details" asp-route-id="@Model.ElementAt(0).CustomCollectionId">Вернуться к коллекции</a>
+</div>

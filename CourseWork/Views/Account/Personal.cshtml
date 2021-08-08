@@ -1,0 +1,8 @@
+﻿@model CourseWork.Infrastructure.Models.User
+
+Персональная страница пользователя <b><i>"@Model.UserName"</i></b>
+
+@foreach (var item in Model.Comments)
+{
+    <p>@item.Description</p>
+}

@@ -4,15 +4,15 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>CustomCollection</h4>
+<h4>Редактирование коллекции "@Model.Title"</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-7">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -33,165 +33,286 @@
                 <input asp-for="Img" class="form-control" />
                 <span asp-validation-for="Img" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsNumericField1Visible" /> @Html.DisplayNameFor(model => model.IsNumericField1Visible)
-                </label>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-7">
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsNumericField2Visible" /> @Html.DisplayNameFor(model => model.IsNumericField2Visible)
-                </label>
+            <div class="col-sm-5">
+                Название поля:
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsNumericField3Visible" /> @Html.DisplayNameFor(model => model.IsNumericField3Visible)
-                </label>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsNumericField1Visible" /> Включить первое числовое поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsOneLineField1Visible" /> @Html.DisplayNameFor(model => model.IsOneLineField1Visible)
-                </label>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="NumericField1" class="form-control" />
+                    <span asp-validation-for="NumericField1" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsOneLineField2Visible" /> @Html.DisplayNameFor(model => model.IsOneLineField2Visible)
-                </label>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsNumericField2Visible" /> Включить второе числовое поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsOneLineField3Visible" /> @Html.DisplayNameFor(model => model.IsOneLineField3Visible)
-                </label>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="NumericField2" class="form-control" />
+                    <span asp-validation-for="NumericField2" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsTextField1Visible" /> @Html.DisplayNameFor(model => model.IsTextField1Visible)
-                </label>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsNumericField3Visible" /> Включить третье числовое поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsTextField2Visible" /> @Html.DisplayNameFor(model => model.IsTextField2Visible)
-                </label>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="NumericField3" class="form-control" />
+                    <span asp-validation-for="NumericField3" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsTextField3Visible" /> @Html.DisplayNameFor(model => model.IsTextField3Visible)
-                </label>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-7">
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDate1Visible" /> @Html.DisplayNameFor(model => model.IsDate1Visible)
-                </label>
+            <div class="col-sm-5">
+                Название поля:
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDate2Visible" /> @Html.DisplayNameFor(model => model.IsDate2Visible)
-                </label>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsOneLineField1Visible" /> Включить первое однострочное поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDate3Visible" /> @Html.DisplayNameFor(model => model.IsDate3Visible)
-                </label>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="OneLineField1" class="form-control" />
+                    <span asp-validation-for="OneLineField1" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsCheckBox1Visible" /> @Html.DisplayNameFor(model => model.IsCheckBox1Visible)
-                </label>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsOneLineField2Visible" /> Включить второе однострочное поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsCheckBox2Visible" /> @Html.DisplayNameFor(model => model.IsCheckBox2Visible)
-                </label>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="OneLineField2" class="form-control" />
+                    <span asp-validation-for="OneLineField2" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsCheckBox3Visible" /> @Html.DisplayNameFor(model => model.IsCheckBox3Visible)
-                </label>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsOneLineField3Visible" /> Включить третье однострочное поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="NumericField1" class="control-label"></label>
-                <input asp-for="NumericField1" class="form-control" />
-                <span asp-validation-for="NumericField1" class="text-danger"></span>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="OneLineField3" class="form-control" />
+                    <span asp-validation-for="OneLineField3" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="NumericField2" class="control-label"></label>
-                <input asp-for="NumericField2" class="form-control" />
-                <span asp-validation-for="NumericField2" class="text-danger"></span>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-7">
             </div>
-            <div class="form-group">
-                <label asp-for="NumericField3" class="control-label"></label>
-                <input asp-for="NumericField3" class="form-control" />
-                <span asp-validation-for="NumericField3" class="text-danger"></span>
+            <div class="col-sm-5">
+                Название поля:
             </div>
-            <div class="form-group">
-                <label asp-for="OneLineField1" class="control-label"></label>
-                <input asp-for="OneLineField1" class="form-control" />
-                <span asp-validation-for="OneLineField1" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsTextField1Visible" /> Включить первое текстовое поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="OneLineField2" class="control-label"></label>
-                <input asp-for="OneLineField2" class="form-control" />
-                <span asp-validation-for="OneLineField2" class="text-danger"></span>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="TextField1" class="form-control" />
+                    <span asp-validation-for="TextField1" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="OneLineField3" class="control-label"></label>
-                <input asp-for="OneLineField3" class="form-control" />
-                <span asp-validation-for="OneLineField3" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsTextField2Visible" /> Включить второе текстовое поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="TextField1" class="control-label"></label>
-                <input asp-for="TextField1" class="form-control" />
-                <span asp-validation-for="TextField1" class="text-danger"></span>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="TextField2" class="form-control" />
+                    <span asp-validation-for="TextField2" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="TextField2" class="control-label"></label>
-                <input asp-for="TextField2" class="form-control" />
-                <span asp-validation-for="TextField2" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsTextField3Visible" /> Включить третье текстовое поле?
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="TextField3" class="control-label"></label>
-                <input asp-for="TextField3" class="form-control" />
-                <span asp-validation-for="TextField3" class="text-danger"></span>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="TextField3" class="form-control" />
+                    <span asp-validation-for="TextField3" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Date1" class="control-label"></label>
-                <input asp-for="Date1" class="form-control" />
-                <span asp-validation-for="Date1" class="text-danger"></span>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-7">
             </div>
-            <div class="form-group">
-                <label asp-for="Date2" class="control-label"></label>
-                <input asp-for="Date2" class="form-control" />
-                <span asp-validation-for="Date2" class="text-danger"></span>
+            <div class="col-sm-5">
+                Название поля:
             </div>
-            <div class="form-group">
-                <label asp-for="Date3" class="control-label"></label>
-                <input asp-for="Date3" class="form-control" />
-                <span asp-validation-for="Date3" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsDate1Visible" /> Включить первое поле с датой?
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CheckBox1" class="control-label"></label>
-                <input asp-for="CheckBox1" class="form-control" />
-                <span asp-validation-for="CheckBox1" class="text-danger"></span>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="Date1" class="form-control" />
+                    <span asp-validation-for="Date1" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CheckBox2" class="control-label"></label>
-                <input asp-for="CheckBox2" class="form-control" />
-                <span asp-validation-for="CheckBox2" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsDate2Visible" /> Включить второе поле с датой?
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CheckBox3" class="control-label"></label>
-                <input asp-for="CheckBox3" class="form-control" />
-                <span asp-validation-for="CheckBox3" class="text-danger"></span>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="Date2" class="form-control" />
+                    <span asp-validation-for="Date2" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsDate3Visible" /> Включить третье поле с датой?
+                    </label>
+                </div>
             </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="Date3" class="form-control" />
+                    <span asp-validation-for="Date3" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-7">
+            </div>
+            <div class="col-sm-5">
+                Название поля:
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsCheckBox1Visible" /> Включить первый checkbox?
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="CheckBox1" class="form-control" />
+                    <span asp-validation-for="CheckBox1" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsCheckBox2Visible" /> Включить второй checkbox?
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="CheckBox2" class="form-control" />
+                    <span asp-validation-for="CheckBox2" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsCheckBox3Visible" /> Включить третий checkbox?
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <input asp-for="CheckBox3" class="form-control" />
+                    <span asp-validation-for="CheckBox3" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group text-center">
+                    <a asp-controller="Account" asp-action="Personal">В личный кабинет</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

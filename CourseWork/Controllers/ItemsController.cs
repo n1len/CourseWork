@@ -26,11 +26,18 @@ namespace CourseWork.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
+            var userId = await GetUserId();
             var applicationContext = _context.Item
-                .Include(i => i.CustomCollection);
-            return View(await applicationContext.ToListAsync());
+                .Include(i => i.CustomCollection)
+                .Where(i => i.CustomCollectionId == id);
+            foreach (var item in applicationContext)
+            {
+                if (item.CustomCollection.UserId != userId)
+                    return NotFound();
+            }
+            return View(applicationContext);
         }
 
         [HttpGet]
@@ -63,6 +70,10 @@ namespace CourseWork.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var customCollection = await GetCustomCollection(id);
+            var userId = await GetUserId();
+
+            if (customCollection.UserId != userId)
+                return NotFound();
 
             var itemViewModel = new ItemViewModel
             {
@@ -78,7 +89,7 @@ namespace CourseWork.Controllers
             if (ModelState.IsValid)
             {
                 DbObjects.CreateItem(_context,item,id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { id = id });
             }
             var customCollection = await GetCustomCollection(id);
             var itemViewModel = new ItemViewModel
@@ -129,7 +140,13 @@ namespace CourseWork.Controllers
             var item = await _context.Item.FindAsync(id);
             if (item == null)
                 return NotFound();
+
             var customCollection = await GetCustomCollection(item.CustomCollectionId);
+
+            var userId = await GetUserId();
+            if (customCollection.UserId != userId)
+                return NotFound();
+
             var itemViewModel = new ItemViewModel
             {
                 CustomCollection = customCollection,
@@ -161,7 +178,7 @@ namespace CourseWork.Controllers
                     else
                         throw;
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { id = item.CustomCollectionId });
             }
             var customCollection = await GetCustomCollection(item.Id);
             var itemViewModel = new ItemViewModel
@@ -182,7 +199,9 @@ namespace CourseWork.Controllers
                 .Include(i => i.CustomCollection)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (item == null)
+            var userId = await GetUserId();
+
+            if (item == null || item.CustomCollection.UserId != userId)
                 return NotFound();
 
             return View(item);
@@ -196,7 +215,7 @@ namespace CourseWork.Controllers
             var item = await _context.Item.FindAsync(id);
             _context.Item.Remove(item);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new {id = item.CustomCollectionId});
         }
 
         private bool ItemExists(int id)

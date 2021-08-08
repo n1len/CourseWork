@@ -22,13 +22,6 @@ namespace CourseWork.Controllers
             _userManager = userManager;
         }
 
-        // GET: CustomCollections
-        public async Task<IActionResult> Index()
-        {
-            var applicationContext = _context.CustomCollection.Include(c => c.User);
-            return View(await applicationContext.ToListAsync());
-        }
-
         // GET: CustomCollections/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -51,7 +44,6 @@ namespace CourseWork.Controllers
         // GET: CustomCollections/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -68,9 +60,8 @@ namespace CourseWork.Controllers
                 customCollection.UserId = user.Id;
                 _context.Add(customCollection);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Personal","Account");
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", customCollection.UserId);
             return View(customCollection);
         }
 
@@ -82,18 +73,17 @@ namespace CourseWork.Controllers
                 return NotFound();
             }
 
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
             var customCollection = await _context.CustomCollection.FindAsync(id);
-            if (customCollection == null)
+            if (customCollection == null || customCollection.UserId != user.Id)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", customCollection.UserId);
             return View(customCollection);
         }
 
         // POST: CustomCollections/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection)
@@ -123,9 +113,8 @@ namespace CourseWork.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details",new {id = id});
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", customCollection.UserId);
             return View(customCollection);
         }
 
@@ -140,7 +129,8 @@ namespace CourseWork.Controllers
             var customCollection = await _context.CustomCollection
                 .Include(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customCollection == null)
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (customCollection == null || customCollection.UserId != user.Id)
             {
                 return NotFound();
             }
@@ -156,7 +146,7 @@ namespace CourseWork.Controllers
             var customCollection = await _context.CustomCollection.FindAsync(id);
             _context.CustomCollection.Remove(customCollection);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Personal","Account");
         }
 
         private bool CustomCollectionExists(int id)

@@ -4,9 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Item</h4>
+<h4>Окно изменения айтема "@Model.Item.Title"</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -148,15 +146,20 @@
                 <select asp-for="Item.CustomCollectionId" class="form-control" asp-items="ViewBag.CustomCollectionId"></select>
                 <span asp-validation-for="Item.CustomCollectionId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group text-center">
+                        <a asp-action="Index" asp-route-id="@Model.CustomCollection.Id">К списку айтемов</a>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

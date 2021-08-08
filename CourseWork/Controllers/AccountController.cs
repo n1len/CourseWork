@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
 using CourseWork.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseWork.Controllers
 {
@@ -10,11 +12,13 @@ namespace CourseWork.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly ApplicationContext _context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,ApplicationContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
         
         [HttpGet]
@@ -80,6 +84,16 @@ namespace CourseWork.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Personal()
+        {
+            var userModel = await _userManager.FindByNameAsync(User.Identity.Name);
+            var userId = userModel.Id;
+
+            var user = await _context.Users.FirstOrDefaultAsync(i => i.Id == userId);
+
+            return View(user);
         }
     }
 }

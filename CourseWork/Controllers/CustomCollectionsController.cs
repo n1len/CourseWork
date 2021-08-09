@@ -33,6 +33,27 @@ namespace CourseWork.Controllers
             var customCollection = await _context.CustomCollection
                 .Include(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (customCollection == null || customCollection.UserId != user.Id)
+            {
+                return NotFound();
+            }
+
+            return View(customCollection);
+        }
+
+        public async Task<IActionResult> Show(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customCollection = await _context.CustomCollection
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (customCollection == null)
             {
                 return NotFound();

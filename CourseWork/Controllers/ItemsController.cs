@@ -37,7 +37,14 @@ namespace CourseWork.Controllers
                 if (item.CustomCollection.UserId != userId)
                     return NotFound();
             }
-            return View(applicationContext);
+
+            var collection = await GetCustomCollection(id);
+            var itemViewModel = new ItemViewModel
+            {
+                Items = applicationContext,
+                CustomCollection = collection
+            };
+            return View(itemViewModel);
         }
 
         [HttpGet]

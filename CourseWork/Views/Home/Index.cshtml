@@ -1,8 +1,76 @@
-﻿@{
+﻿@model CourseWork.ViewModels.HomeViewModel
+
+@{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-sm-5 items">
+        <h5 class="text-center">Последние добавленные айтемы</h5>
+        <hr />
+        @foreach (var item in Model.Items)
+        {
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Название айтема:</i></b></p>
+                </div>
+                <div class="col">
+                    <a asp-controller="Items" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Теги:</i></b></p>
+                </div>
+                <div class="col">
+                    <p>@item.Tags</p>
+                </div>
+            </div>
+            <hr/>
+        }
+    </div>
+    <div class="col-sm-6 collections">
+        <h5 class="text-center">Коллекции с наибольшим количеством айтемов</h5>
+        <hr/>
+        @foreach (var collection in Model.CustomCollections)
+        {
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Название коллекции:</i></b></p>
+                </div>
+                <div class="col">
+                    <a asp-controller="CustomCollections" asp-action="Show" asp-route-id="@collection.Id">@collection.Title</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Кол-во айтемов в коллекции:</i></b></p>
+                </div>
+                <div class="col">
+                    <p>@collection.Items.Count</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <p><b><i>Тема:</i></b></p>
+                </div>
+                <div class="col">
+                    <p>@collection.Topic</p>
+                </div>
+            </div>
+            <hr />
+        }
+    </div>
+    <div class="col-sm-1 tags">
+        <h5 class="text-right">Облако тегов</h5>
+        <hr/>
+        <ul>
+            @foreach (var tag in Model.Tags)
+            {
+                <li>
+                    <a asp-controller="#" asp-action="#">@tag</a>
+                </li>
+            }
+        </ul>
+    </div>
 </div>

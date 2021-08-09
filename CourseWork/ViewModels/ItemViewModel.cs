@@ -10,6 +10,7 @@ namespace CourseWork.ViewModels
     public class ItemViewModel
     {
         public Item Item { get; set; }
+        public IEnumerable<Item> Items { get; set; }
 
         [Required(ErrorMessage = "Комментарий не может быть пустым")]
         public string Description { get; set; }

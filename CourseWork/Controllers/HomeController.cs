@@ -58,6 +58,20 @@ namespace CourseWork.Controllers
             return View(search);
         }
 
+        public IActionResult SearchByTags(string tags)
+        {
+            var items = _context.Item
+                .Where(x => x.Tags.Contains(tags));
+
+            var search = new SearchViewModel
+            {
+                Items = items,
+                Query = tags
+            };
+
+            return View(search);
+        }
+
         private IEnumerable<CustomCollection> GetTopCollections()
         {
             var collections = _context.CustomCollection

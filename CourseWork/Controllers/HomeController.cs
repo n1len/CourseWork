@@ -35,7 +35,30 @@ namespace CourseWork.Controllers
             return View(homeViewModel);
         }
 
-        public IEnumerable<CustomCollection> GetTopCollections()
+        public IActionResult Search(string query)
+        {
+            var items = _context.Item
+                .Include(c => c.CustomCollection)
+                .Where(x => x.Title.Contains(query) || x.Tags.Contains(query) || x.NumericField1.Contains(query)
+                            || x.NumericField2.Contains(query) || x.NumericField3.Contains(query) || x.OneLineField1.Contains(query)
+                            || x.OneLineField2.Contains(query) || x.OneLineField3.Contains(query) || x.TextField1.Contains(query)
+                            || x.TextField2.Contains(query) || x.TextField3.Contains(query) || x.Date1.Contains(query)
+                            || x.Date2.Contains(query) || x.Date3.Contains(query) || x.CustomCollection.Description.Contains(query));
+            var comments = _context.Comment
+                .Include(i => i.Item)
+                .Where(c => c.Description.Contains(query));
+
+            var search = new SearchViewModel
+            {
+                Items = items,
+                Comments = comments,
+                Query = query
+            };
+
+            return View(search);
+        }
+
+        private IEnumerable<CustomCollection> GetTopCollections()
         {
             var collections = _context.CustomCollection
                 .Include(i => i.Items)
@@ -44,7 +67,7 @@ namespace CourseWork.Controllers
             return collections;
         }
 
-        public IEnumerable<Item> GetLastAddedItems()
+        private IEnumerable<Item> GetLastAddedItems()
         {
             var items = _context.Item
                 .OrderByDescending(i => i.Id).Take(4);
@@ -52,7 +75,7 @@ namespace CourseWork.Controllers
             return items;
         }
 
-        public IEnumerable<string> GetUniqueTags()
+        private IEnumerable<string> GetUniqueTags()
         {
             var tags = _context.Item
                 .Select(i => i.Tags)

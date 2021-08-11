@@ -26,6 +26,7 @@ namespace CourseWork.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Index(int id)
         {
             var userId = await GetUserId();
@@ -74,6 +75,7 @@ namespace CourseWork.Controllers
             return RedirectToAction("Details");
         }
 
+        [Authorize]
         public async Task<IActionResult> Create(int id)
         {
             var customCollection = await GetCustomCollection(id);
@@ -91,6 +93,7 @@ namespace CourseWork.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create(int id, Item item)
         {
             if (ModelState.IsValid)
@@ -139,6 +142,7 @@ namespace CourseWork.Controllers
             return RedirectToAction("Details", new {id = id});
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -166,6 +170,7 @@ namespace CourseWork.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Tags,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3,CustomCollectionId")] Item item)
         {
             if (id != item.Id)
@@ -197,6 +202,7 @@ namespace CourseWork.Controllers
             return View(itemViewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -217,6 +223,7 @@ namespace CourseWork.Controllers
         
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var item = await _context.Item.FindAsync(id);

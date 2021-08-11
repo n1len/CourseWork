@@ -1,5 +1,20 @@
 ﻿@model CourseWork.Infrastructure.Models.User
-Персональная страница пользователя <b><i>"@Model.UserName"</i></b>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-right">
+            <p>Личный кабинет пользователя <b><i>"@Model.UserName"</i></b></p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-center">
+            <a class="btn btn-outline-danger" asp-action="Create" asp-controller="CustomCollections">Создать новую коллекцию</a>
+        </div>
+    </div>
+</div>
 
 <h3 class="text-center">Ваши коллекции</h3>
 <hr/>

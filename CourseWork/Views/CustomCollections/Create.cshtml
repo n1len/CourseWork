@@ -21,8 +21,14 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Topic" class="control-label"></label>
-                <input asp-for="Topic" class="form-control" />
+                <select asp-for="Topic" class="form-control" autocomplete="off">
+                    <option value="" selected="">Тема</option>
+                    <option value="Books">Книги</option>
+                    <option value="Alcohol">Алкоголь</option>
+                    <option value="Badges">Значки</option>
+                    <option value="Stamps">Марки</option>
+                    <option value="Others">Остальное</option>
+                </select>
                 <span asp-validation-for="Topic" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace CourseWork.Controllers
@@ -22,7 +23,7 @@ namespace CourseWork.Controllers
             _userManager = userManager;
         }
 
-        // GET: CustomCollections/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -62,17 +63,15 @@ namespace CourseWork.Controllers
             return View(customCollection);
         }
 
-        // GET: CustomCollections/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CustomCollections/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection)
         {
             if (ModelState.IsValid)
@@ -86,7 +85,7 @@ namespace CourseWork.Controllers
             return View(customCollection);
         }
 
-        // GET: CustomCollections/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -104,9 +103,10 @@ namespace CourseWork.Controllers
             return View(customCollection);
         }
 
-        // POST: CustomCollections/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection)
         {
             if (id != customCollection.Id)
@@ -139,7 +139,7 @@ namespace CourseWork.Controllers
             return View(customCollection);
         }
 
-        // GET: CustomCollections/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -159,9 +159,9 @@ namespace CourseWork.Controllers
             return View(customCollection);
         }
 
-        // POST: CustomCollections/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var customCollection = await _context.CustomCollection.FindAsync(id);

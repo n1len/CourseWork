@@ -6,12 +6,14 @@ namespace CourseWork.Infrastructure.Models
     public class CustomCollection
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Данное поле не может быть пустым.")]
         [Display(Name = "Название коллекции:")]
         public string Title { get; set; }
 
         [Display(Name = "Описание:")]
         public string Description { get; set; }
 
+        [Required(ErrorMessage = "Тема должна быть выбрана.")]
         [Display(Name = "Тема:")]
         public string Topic { get; set; }
 

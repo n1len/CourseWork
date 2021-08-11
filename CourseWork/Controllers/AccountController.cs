@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
 using CourseWork.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -86,6 +87,7 @@ namespace CourseWork.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public async Task<IActionResult> Personal()
         {
             var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);

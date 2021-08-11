@@ -32,10 +32,7 @@
                                 <a class="btn btn-outline-danger" asp-action="Personal" asp-controller="Account">Личный кабинет</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-danger" asp-action="Create" asp-controller="CustomCollections">Добавить коллекцию</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-danger" asp-action="Logout" asp-controller="Account">Log out</a>
+                                <a class="btn btn-outline-danger" asp-action="Logout" asp-controller="Account">Выйти</a>
                             </li>
                             @if (User.IsInRole("admin"))
                             {

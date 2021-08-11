@@ -87,6 +87,7 @@ namespace CourseWork.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public async Task<IActionResult> Personal()
         {
             var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);

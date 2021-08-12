@@ -1,0 +1,168 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background: rgb(29, 29, 29);
+    margin-bottom: 60px;
+}
+
+.comment {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: solid 1px #ffffff;
+    border-radius: 25px;
+}
+
+    .comment p {
+        margin: 10px;
+        font-family: Verdana, sans-serif;
+        font-size: 17px;
+    }
+
+    .comment h4 {
+        margin: 10px;
+        font-family: Verdana, sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+.items {
+    border-right: 1px solid gray;
+}
+
+.collections {
+    border-right: 1px solid gray;
+}
+
+.tags a {
+    padding: 5px;
+    background-color: wheat;
+    border: 1px solid white;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.tags li {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #ffffff;
+}
+
+h5 {
+    color: #ffffff;
+}
+
+h4 {
+    color: #ffffff;
+}
+
+
+h3 {
+    color: #ffffff;
+}
+
+h2 {
+    color: #ffffff;
+}
+
+hr {
+    background: gray;
+}
+
+.navbar {
+    background: rgb(29, 29, 29) !important;
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+}
+
+.btn-outline-danger {
+    color: #ffffff;
+}
+
+.btn-outline-success {
+    color: #ffffff;
+}
+
+.form-group {
+    color: #ffffff;
+}
+
+dl {
+    color: #ffffff;
+}
+
+b {
+    color: #ffffff;
+}
+
+tr {
+    color: #ffffff;
+}
+
+.btn-outline-dark {
+    color: #ffffff;
+}

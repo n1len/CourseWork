@@ -7,6 +7,8 @@ using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
 using CourseWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseWork.Controllers
@@ -70,6 +72,32 @@ namespace CourseWork.Controllers
             };
 
             return View(search);
+        }
+
+        public IActionResult ChangeThemeMode()
+        {
+            var theme = HttpContext.Request.Cookies["Theme"];
+
+            switch (theme)
+            {
+                case null:
+                    theme = "dark";
+                    break;
+                case "light":
+                    theme = "dark";
+                    break;
+                default:
+                    theme = "light";
+                    break;
+            }
+
+            HttpContext.Response.Cookies.Append("Theme", theme,new CookieOptions
+            {
+                IsEssential = true,
+                Secure = true
+            });
+
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         private IEnumerable<CustomCollection> GetTopCollections()

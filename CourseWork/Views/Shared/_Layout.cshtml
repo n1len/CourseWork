@@ -1,11 +1,26 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CourseWork</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    @{
+        Context.Request.Cookies.TryGetValue("Theme", out string theme);
+        switch (theme)
+        {
+            case null:
+                <link rel="stylesheet" href="~/css/light-mode.css" />
+                break;
+            case "dark":
+                <link rel="stylesheet" href="~/css/dark-mode.css" />
+                break;
+            default:
+                <link rel="stylesheet" href="~/css/light-mode.css" />
+                break;
+        }
+    }
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 </head>
 <body>
@@ -22,12 +37,10 @@
                         <input class="form-control mr-sm-4" type="search" name="query" placeholder="Введите запрос" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти айтемы</button>
                     </form>
+                    <a class="btn btn-outline-danger" asp-controller="Home" asp-action="ChangeThemeMode">Сменить тему</a>
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark">Hello, @User.Identity.Name</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-danger" asp-action="Personal" asp-controller="Account">Личный кабинет</a>
                             </li>

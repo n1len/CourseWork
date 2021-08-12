@@ -59,8 +59,7 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;
@@ -108,4 +107,16 @@ body {
 
 .tags li {
     margin-bottom: 20px;
+}
+
+hr {
+    background: gray;
+}
+
+.btn-outline-danger {
+    color: black;
+}
+
+.btn-outline-success {
+    color: black;
 }

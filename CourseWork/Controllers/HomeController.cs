@@ -119,11 +119,18 @@ namespace CourseWork.Controllers
 
         private IEnumerable<string> GetUniqueTags()
         {
-            var tags = _context.Item
+            var tempTags = _context.Item
                 .Select(i => i.Tags)
                 .Distinct().Take(10);
 
+            var tags = SplitBy(tempTags).Distinct();
+
             return tags;
+        }
+
+        private static IEnumerable<string> SplitBy(IEnumerable<string> tags)
+        {
+            return tags.SelectMany(s => s.Split(",")).OrderBy(p => p);
         }
     }
 }

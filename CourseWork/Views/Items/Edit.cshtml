@@ -18,7 +18,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Item.Tags" class="control-label"></label>
-                <input asp-for="Item.Tags" name="item.Tags" class="form-control" />
+                <input name="tags" id="newTag" placeholder="#tag" class="form-control" asp-for="Item.Tags" />
+                <input id="hiddenTags" name="item.Tags" class="form-control" maxlength="30" type="hidden" asp-for="Item.Tags" />
                 <span asp-validation-for="Item.Tags" class="text-danger"></span>
             </div>
             @if (Model.CustomCollection.IsNumericField1Visible)
@@ -165,3 +166,37 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src='@Url.Content("https://unpkg.com/@yaireo/tagify")'></script>
+<script src='@Url.Content("https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js")'></script>
+<link href=@Url.Content("https://unpkg.com/@yaireo/tagify/dist/tagify.css") rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    var input = document.querySelector('input[name="tags"]');
+
+    tagify = new Tagify(input,
+        {
+            editTags: {
+                clicks: 1,              
+                keepInvalid: false      
+            },
+            maxTags: 10,
+            dropdown: {
+                maxItems: 20,
+                position: "input",
+                enabled: 1
+            }
+        });
+
+    $('form').submit(function () {
+        var str = "", array = JSON.parse($('#newTag').val());
+        array.forEach(item => {
+            str += item.value + ",";
+        });
+        str = str.substring(0, (str.length - 1));
+        $('#hiddenTags').val(str);
+        return true;
+    });
+</script>

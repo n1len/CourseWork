@@ -38,4 +38,37 @@
             </form>
         </section>
     </div>
+    <div class="text-center">
+        <h5>Войти с помощью:</h5>
+        <hr/>
+        @{
+            if (Model.ExternalLogins.Count == 0)
+            {
+                <p>Нету доступных внешних сервисов</p>
+            }
+            else
+            {
+                <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div>
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn btn-primary" name="provider"
+                                    value="@provider.Name" title="Войдите используя ваш @provider.DisplayName аккаунт">
+                                @if (provider.DisplayName == "Google")
+                                {
+                                    <i class="fab fa-google"></i>
+                                    @provider.DisplayName
+                                }
+                                @if (provider.DisplayName == "Facebook")
+                                {
+                                    <i class="fab fa-facebook"></i>
+                                    @provider.DisplayName
+                                }
+                            </button>
+                        }
+                    </div>
+                </form>
+            }
+        }
+    </div>
 </div>

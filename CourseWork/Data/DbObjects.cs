@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWork.Infrastructure.Models;
-using CourseWork.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseWork.Data

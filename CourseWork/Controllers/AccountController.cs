@@ -84,6 +84,11 @@ namespace CourseWork.Controllers
 
             if (signInResult.Succeeded)
                 return LocalRedirect(returnUrl);
+            else if (signInResult.IsLockedOut)
+            {
+                ModelState.AddModelError("", "Аккаунт заблокирован");
+                RedirectToAction("Login", loginViewModel);
+            }
             else
             {
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
@@ -153,13 +158,22 @@ namespace CourseWork.Controllers
                 {
                     if((await _userManager.FindByNameAsync(model.UserName)).IsBlocked != true) 
                         return RedirectToAction("Index", "Home");
-                    else
-                        ModelState.AddModelError("", "Аккаунт заблокирован");
                 }
+                else if (result.IsLockedOut)
+                    ModelState.AddModelError("", "Аккаунт заблокирован");
                 else
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
             }
-            return View(model);
+
+            var viewModel = new LoginViewModel
+            {
+                UserName = model.UserName,
+                Password = model.Password,
+                ReturnUrl = model.ReturnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            return View(viewModel);
         }
 
 

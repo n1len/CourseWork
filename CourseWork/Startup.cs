@@ -39,6 +39,17 @@ namespace CourseWork
             services.AddIdentity<User,IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "117572447378-8am53tptei4ttbclvsev95i8eg6srlc3.apps.googleusercontent.com";
+                    options.ClientSecret = "hR47cpm7HbaBLQx6jzGDhkrl";
+                    options.AccessDeniedPath = "";
+                })
+                .AddFacebook(options =>
+                {
+                    options.AppId = "174491804665627";
+                    options.AppSecret = "57661e07526a10ab3463d9a9c5e27acc";
+                })
                 .AddCookie(options =>
                 {
                     options.LoginPath = new PathString("/Account/Login");
@@ -52,7 +63,7 @@ namespace CourseWork
                 options.Password.RequiredLength = 1;
                 options.Password.RequiredUniqueChars = 1;
                 options.User.AllowedUserNameCharacters =
-                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+יצףךוםדרשחץתפûגאןנמכהז‎ÿקסלטעüב‏¸ÉÖÓÊÅÍÃØÙÇÕÚÔÛÂÀÏÐÎËÄÆÝ‗×ÑÌÈÒÜÁÞ¨";
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+יצףךוםדרשחץתפûגאןנמכהז‎ÿקסלטעüב‏¸ÉÖÓÊÅÍÃØÙÇÕÚÔÛÂÀÏÐÎËÄÆÝ‗×ÑÌÈÒÜÁÞ¨ ";
                 options.User.RequireUniqueEmail = true;
             });
             services.AddRazorPages();
@@ -87,6 +98,7 @@ namespace CourseWork
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -403,5 +403,5 @@
     <hr />
 </div>
 <div class="form-group text-center">
-    <a asp-controller="Account" asp-action="Personal">В личный кабинет</a>
+    <a asp-controller="Account" asp-action="Personal" asp-route-userName="@Model.User.UserName">В личный кабинет</a>
 </div>

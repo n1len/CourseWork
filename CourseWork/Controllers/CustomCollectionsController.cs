@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
+using CourseWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
@@ -36,10 +37,14 @@ namespace CourseWork.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (customCollection == null || customCollection.UserId != user.Id)
+            if (!User.IsInRole("admin"))
             {
-                return NotFound();
+                if (customCollection == null || customCollection.UserId != user.Id)
+                    return NotFound();
             }
+            if (customCollection == null)
+                return NotFound();
+
 
             return View(customCollection);
         }
@@ -64,50 +69,92 @@ namespace CourseWork.Controllers
         }
 
         [Authorize]
-        public IActionResult Create()
+        public IActionResult Create(string userName)
         {
-            return View();
+            if (userName == null)
+                return NotFound();
+            var model = new CollectionViewModel
+            {
+                UserName = userName
+            };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection,string userName)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                customCollection.UserId = user.Id;
+                if (User.IsInRole("admin"))
+                {
+                    var user = await _userManager.FindByNameAsync(userName);
+                    if (user == null)
+                        return NotFound();
+                    customCollection.UserId = user.Id;
+                }
+                else
+                {
+                    var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    if (user == null)
+                        return NotFound();
+                    customCollection.UserId = user.Id;
+                }
                 _context.Add(customCollection);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Personal","Account");
+                return RedirectToAction("Personal","Account", new {UserName = userName});
             }
-            return View(customCollection);
+
+            var model = new CollectionViewModel
+            {
+                CustomCollection = customCollection,
+                UserName = userName
+            };
+            return View(model);
         }
 
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id,string userName)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await _userManager.FindByNameAsync(userName);
 
-            var customCollection = await _context.CustomCollection.FindAsync(id);
-            if (customCollection == null || customCollection.UserId != user.Id)
+            var customCollection = await _context.CustomCollection
+                .Include(u => u.User)
+                .FirstOrDefaultAsync(c => c.Id == id);
+            if (!User.IsInRole("admin"))
             {
-                return NotFound();
+                var tempUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+                if (user == null || user.UserName != tempUser.UserName)
+                    return NotFound();
+
+                if (customCollection == null || customCollection.UserId != user.Id)
+                    return NotFound();
             }
-            return View(customCollection);
+
+            if (customCollection == null)
+                return NotFound();
+
+            var model = new CollectionViewModel
+            {
+                CustomCollection = customCollection,
+                UserName = userName
+            };
+
+            return View(model);
         }
 
         
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection, string userName)
         {
             if (id != customCollection.Id)
             {
@@ -118,7 +165,7 @@ namespace CourseWork.Controllers
             {
                 try
                 {
-                    var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    var user = await _userManager.FindByNameAsync(userName);
                     customCollection.UserId = user.Id;
                     _context.Update(customCollection);
                     await _context.SaveChangesAsync();
@@ -136,7 +183,13 @@ namespace CourseWork.Controllers
                 }
                 return RedirectToAction("Details",new {id = id});
             }
-            return View(customCollection);
+
+            var model = new CollectionViewModel
+            {
+                CustomCollection = customCollection,
+                UserName = userName
+            };
+            return View(model);
         }
 
         [Authorize]
@@ -151,10 +204,13 @@ namespace CourseWork.Controllers
                 .Include(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (customCollection == null || customCollection.UserId != user.Id)
+            if (!User.IsInRole("admin"))
             {
-                return NotFound();
+                if (customCollection == null || customCollection.UserId != user.Id)
+                    return NotFound();
             }
+            if (customCollection == null)
+                return NotFound();
 
             return View(customCollection);
         }
@@ -164,10 +220,13 @@ namespace CourseWork.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customCollection = await _context.CustomCollection.FindAsync(id);
+            var customCollection = await _context.CustomCollection
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(i => i.Id == id);
+            var userName = customCollection.User.UserName;
             _context.CustomCollection.Remove(customCollection);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Personal","Account");
+            return RedirectToAction("Personal","Account",new {UserName = userName });
         }
 
         private bool CustomCollectionExists(int id)

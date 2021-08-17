@@ -42,7 +42,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="btn btn-outline-danger" asp-action="Personal" asp-controller="Account">Личный кабинет</a>
+                                <a class="btn btn-outline-danger" asp-action="Personal" asp-controller="Account" asp-route-userName="@User.Identity.Name">Личный кабинет</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-danger" asp-action="Logout" asp-controller="Account">Выйти</a>

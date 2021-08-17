@@ -20,7 +20,8 @@ namespace CourseWork.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly ApplicationContext _context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,ApplicationContext context)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
+            ApplicationContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -184,9 +185,19 @@ namespace CourseWork.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Personal()
+        public async Task<IActionResult> Personal(string userName)
         {
-            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var tempUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var currentUser = await _userManager.FindByNameAsync(userName);
+            if (User.IsInRole("admin") == false)
+            {
+                if (tempUser != currentUser || currentUser == null)
+                    return NotFound();
+            }
+
+            if (currentUser == null)
+                return NotFound();
+            
             var userId = currentUser.Id;
 
             var user = await _context.Users

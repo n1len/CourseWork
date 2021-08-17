@@ -33,10 +33,13 @@ namespace CourseWork.Controllers
             var applicationContext = _context.Item
                 .Include(i => i.CustomCollection)
                 .Where(i => i.CustomCollectionId == id);
-            foreach (var item in applicationContext)
+            if (!User.IsInRole("admin"))
             {
-                if (item.CustomCollection.UserId != userId)
-                    return NotFound();
+                foreach (var item in applicationContext)
+                {
+                    if (item.CustomCollection.UserId != userId)
+                        return NotFound();
+                }
             }
 
             var collection = await GetCustomCollection(id);
@@ -81,9 +84,12 @@ namespace CourseWork.Controllers
             var customCollection = await GetCustomCollection(id);
             var userId = await GetUserId();
 
-            if (customCollection.UserId != userId)
-                return NotFound();
-
+            if (!User.IsInRole("admin"))
+            {
+                if (customCollection.UserId != userId)
+                    return NotFound();
+            }
+            
             var itemViewModel = new ItemViewModel
             {
                 CustomCollection = customCollection
@@ -154,9 +160,12 @@ namespace CourseWork.Controllers
 
             var customCollection = await GetCustomCollection(item.CustomCollectionId);
 
-            var userId = await GetUserId();
-            if (customCollection.UserId != userId)
-                return NotFound();
+            if (!User.IsInRole("admin"))
+            {
+                var userId = await GetUserId();
+                if (customCollection.UserId != userId)
+                    return NotFound();
+            }
 
             var itemViewModel = new ItemViewModel
             {
@@ -164,7 +173,7 @@ namespace CourseWork.Controllers
                 Item = item
             };
 
-            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection, "Id", "Title", item.CustomCollectionId);
+            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection.Where(u => u.UserId == customCollection.UserId), "Id", "Title", item.CustomCollectionId);
             return View(itemViewModel);
         }
 
@@ -198,7 +207,7 @@ namespace CourseWork.Controllers
                 Item = item,
                 CustomCollection = customCollection
             };
-            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection, "Id", "Title", item.CustomCollectionId);
+            ViewData["CustomCollectionId"] = new SelectList(_context.CustomCollection.Where(u => u.UserId == customCollection.UserId), "Id", "Title", item.CustomCollectionId);
             return View(itemViewModel);
         }
 
@@ -211,10 +220,15 @@ namespace CourseWork.Controllers
             var item = await _context.Item
                 .Include(i => i.CustomCollection)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            if (!User.IsInRole("admin"))
+            {
+                var userId = await GetUserId();
 
-            var userId = await GetUserId();
+                if (item == null || item.CustomCollection.UserId != userId)
+                    return NotFound();
+            }
 
-            if (item == null || item.CustomCollection.UserId != userId)
+            if (item == null)
                 return NotFound();
 
             return View(item);

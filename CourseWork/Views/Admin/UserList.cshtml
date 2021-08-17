@@ -33,7 +33,6 @@
                 </th>
                 <th></th>
             </tr>
-            </thead>
             <tbody>
             @foreach (var user in Model)
             {
@@ -42,7 +41,7 @@
                         <input type="checkbox" value="@user.Id" name="usersIds" class="custom-checkbox" />
                     </td>
                     <td>
-                        @user.UserName
+                        <a asp-controller="Account" asp-action="Personal" asp-route-userName="@user.UserName">@user.UserName</a>
                     </td>
                     <td>
                         @if (!user.IsBlocked)

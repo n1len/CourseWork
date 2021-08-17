@@ -392,7 +392,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group text-right">
-                <a asp-controller="Account" asp-action="Personal">В личный кабинет</a>
+                <a asp-controller="Account" asp-action="Personal" asp-route-userName="@Model.User.UserName">В личный кабинет</a>
             </div>
         </div>
         <div class="col-sm-6">

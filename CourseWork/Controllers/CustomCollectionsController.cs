@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
 using CourseWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 
 namespace CourseWork.Controllers
@@ -17,11 +19,14 @@ namespace CourseWork.Controllers
     {
         private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CustomCollectionsController(ApplicationContext context, UserManager<User> userManager)
+        public CustomCollectionsController(ApplicationContext context, UserManager<User> userManager,
+            IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [Authorize]
@@ -154,7 +159,7 @@ namespace CourseWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection, string userName)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection, string userName,CollectionViewModel viewModel)
         {
             if (id != customCollection.Id)
             {
@@ -165,6 +170,8 @@ namespace CourseWork.Controllers
             {
                 try
                 {
+                    var fileName = UploadedImage(viewModel);
+                    customCollection.Img = fileName;
                     var user = await _userManager.FindByNameAsync(userName);
                     customCollection.UserId = user.Id;
                     _context.Update(customCollection);
@@ -232,6 +239,21 @@ namespace CourseWork.Controllers
         private bool CustomCollectionExists(int id)
         {
             return _context.CustomCollection.Any(e => e.Id == id);
+        }
+
+        private string UploadedImage(CollectionViewModel model)
+        {
+            string fileName = null;
+            if (model.CollectionImage != null)
+            {
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                fileName = Guid.NewGuid().ToString() + "_" + model.CollectionImage.FileName;
+                var filePath = Path.Combine(uploadsFolder, fileName);
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                model.CollectionImage.CopyTo(fileStream);
+            }
+
+            return fileName;
         }
     }
 }

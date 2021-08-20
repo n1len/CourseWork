@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,11 @@ namespace CourseWork.Controllers
         private readonly ApplicationContext _context;
         private readonly UserManager<User> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
+
+        private static Cloudinary cloudinary;
+        private static string cloud_name = "dpmauufdt";
+        private static string api_key = "378443462439775";
+        private static string api_secret = "2-bzZf2fR5Mmm9mCcgRFOnuSaps";
 
         public CustomCollectionsController(ApplicationContext context, UserManager<User> userManager,
             IWebHostEnvironment webHostEnvironment)
@@ -88,7 +95,7 @@ namespace CourseWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection,string userName)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection,string userName,CollectionViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -106,6 +113,9 @@ namespace CourseWork.Controllers
                         return NotFound();
                     customCollection.UserId = user.Id;
                 }
+                var fileName = await UploadedImage(viewModel);
+                customCollection.Img = fileName;
+
                 _context.Add(customCollection);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Personal","Account", new {UserName = userName});
@@ -170,7 +180,7 @@ namespace CourseWork.Controllers
             {
                 try
                 {
-                    var fileName = UploadedImage(viewModel);
+                    var fileName = await UploadedImage(viewModel);
                     customCollection.Img = fileName;
                     var user = await _userManager.FindByNameAsync(userName);
                     customCollection.UserId = user.Id;
@@ -241,17 +251,37 @@ namespace CourseWork.Controllers
             return _context.CustomCollection.Any(e => e.Id == id);
         }
 
-        private string UploadedImage(CollectionViewModel model)
+        private async Task<string> UploadedImage(CollectionViewModel model)
         {
             string fileName = null;
+            string filePath = null;
             if (model.CollectionImage != null)
             {
                 var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
                 fileName = Guid.NewGuid().ToString() + "_" + model.CollectionImage.FileName;
-                var filePath = Path.Combine(uploadsFolder, fileName);
+                filePath = Path.Combine(uploadsFolder, fileName);
                 using var fileStream = new FileStream(filePath, FileMode.Create);
-                model.CollectionImage.CopyTo(fileStream);
+                   model.CollectionImage.CopyTo(fileStream);
             }
+
+            if (filePath != null)
+            {
+                Account account = new Account(cloud_name, api_key, api_secret);
+                cloudinary = new Cloudinary(account);
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath),
+                    PublicId = fileName
+                };
+
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+                string url = cloudinary.Api.UrlImgUp.BuildUrl(fileName + ".jpg");
+                fileName = url;
+            }
+
+            if(System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath);
 
             return fileName;
         }

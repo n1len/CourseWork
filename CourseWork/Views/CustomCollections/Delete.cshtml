@@ -29,7 +29,9 @@
             <i>@Html.DisplayNameFor(model => model.Img)</i>
         </dt>
         <dd class="col-sm-6">
-            @Html.DisplayFor(model => model.Img)
+            <img src="@Model.Img"
+                 height="200" width="200"
+                 asp-append-version="true" />
         </dd>
     </dl>
     <hr />

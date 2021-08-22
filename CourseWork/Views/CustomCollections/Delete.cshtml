@@ -29,9 +29,16 @@
             <i>@Html.DisplayNameFor(model => model.Img)</i>
         </dt>
         <dd class="col-sm-6">
-            <img src="@Model.Img"
-                 height="200" width="200"
-                 asp-append-version="true" />
+            @if (Model.Img == null)
+            {
+                <p>Изображение не загружено</p>
+            }
+            else
+            {
+                <img src="@Model.Img"
+                     height="200" width="200"
+                     asp-append-version="true" />
+            }
         </dd>
     </dl>
     <hr />

@@ -169,7 +169,7 @@ namespace CourseWork.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Topic,Img,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection, string userName,CollectionViewModel viewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Img,Topic,IsNumericField1Visible,IsNumericField2Visible,IsNumericField3Visible,IsOneLineField1Visible,IsOneLineField2Visible,IsOneLineField3Visible,IsTextField1Visible,IsTextField2Visible,IsTextField3Visible,IsDate1Visible,IsDate2Visible,IsDate3Visible,IsCheckBox1Visible,IsCheckBox2Visible,IsCheckBox3Visible,NumericField1,NumericField2,NumericField3,OneLineField1,OneLineField2,OneLineField3,TextField1,TextField2,TextField3,Date1,Date2,Date3,CheckBox1,CheckBox2,CheckBox3")] CustomCollection customCollection, string userName, string imageUrl, CollectionViewModel viewModel)
         {
             if (id != customCollection.Id)
             {
@@ -181,7 +181,7 @@ namespace CourseWork.Controllers
                 try
                 {
                     var fileName = await UploadedImage(viewModel);
-                    customCollection.Img = fileName;
+                    customCollection.Img = fileName ?? imageUrl;
                     var user = await _userManager.FindByNameAsync(userName);
                     customCollection.UserId = user.Id;
                     _context.Update(customCollection);
@@ -255,13 +255,16 @@ namespace CourseWork.Controllers
         {
             string fileName = null;
             string filePath = null;
+            var fileDir = "images";
             if (model.CollectionImage != null)
             {
-                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, fileDir);
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(fileDir);
                 fileName = Guid.NewGuid().ToString() + "_" + model.CollectionImage.FileName;
                 filePath = Path.Combine(uploadsFolder, fileName);
-                using var fileStream = new FileStream(filePath, FileMode.Create);
-                   model.CollectionImage.CopyTo(fileStream);
+                await using var fileStream = new FileStream(filePath, FileMode.Create);
+                await model.CollectionImage.CopyToAsync(fileStream);
             }
 
             if (filePath != null)
@@ -274,13 +277,13 @@ namespace CourseWork.Controllers
                     PublicId = fileName
                 };
 
-                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                await cloudinary.UploadAsync(uploadParams);
 
                 string url = cloudinary.Api.UrlImgUp.BuildUrl(fileName + ".jpg");
                 fileName = url;
             }
 
-            if(System.IO.File.Exists(filePath))
+            if (System.IO.File.Exists(filePath))
                 System.IO.File.Delete(filePath);
 
             return fileName;

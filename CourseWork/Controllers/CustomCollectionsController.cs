@@ -253,40 +253,29 @@ namespace CourseWork.Controllers
 
         private async Task<string> UploadedImage(CollectionViewModel model)
         {
-            string fileName = null;
-            string filePath = null;
-            var fileDir = "images";
+            string url = null;
+
             if (model.CollectionImage != null)
             {
-                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, fileDir);
-                if (!Directory.Exists(uploadsFolder))
-                    Directory.CreateDirectory(fileDir);
-                fileName = Guid.NewGuid().ToString() + "_" + model.CollectionImage.FileName;
-                filePath = Path.Combine(uploadsFolder, fileName);
-                await using var fileStream = new FileStream(filePath, FileMode.Create);
-                await model.CollectionImage.CopyToAsync(fileStream);
-            }
-
-            if (filePath != null)
-            {
-                Account account = new Account(cloud_name, api_key, api_secret);
-                cloudinary = new Cloudinary(account);
-                var uploadParams = new ImageUploadParams
+                using (var memoryStream = new MemoryStream())
                 {
-                    File = new FileDescription(filePath),
-                    PublicId = fileName
-                };
+                    await model.CollectionImage.CopyToAsync(memoryStream);
+                    memoryStream.Position = 0;
 
-                await cloudinary.UploadAsync(uploadParams);
+                    Account account = new Account(cloud_name, api_key, api_secret);
+                    cloudinary = new Cloudinary(account);
 
-                string url = cloudinary.Api.UrlImgUp.BuildUrl(fileName + ".jpg");
-                fileName = url;
+                    var uploadParams = new ImageUploadParams
+                    {
+                        File = new FileDescription(model.CollectionImage.FileName, memoryStream),
+                    };
+
+                    ImageUploadResult result = await cloudinary.UploadAsync(uploadParams);
+                    url = result.SecureUrl.ToString();
+                }
             }
 
-            if (System.IO.File.Exists(filePath))
-                System.IO.File.Delete(filePath);
-
-            return fileName;
+            return url;
         }
     }
 }

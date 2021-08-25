@@ -34,17 +34,17 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <form class="form-inline mt-2 mt-md-0" asp-controller="Home" asp-action="Search" method="get">
-                        <input class="form-control mr-sm-4" type="search" name="query" placeholder="Введите запрос" aria-label="Search">
+                        <input class="form-control mr-sm-3" type="search" name="query" placeholder="Введите запрос" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти айтемы</button>
                     </form>
-                    <a class="btn btn-outline-danger" asp-controller="Home" asp-action="ChangeThemeMode">Сменить тему</a>
+                    <a class="btn btn-outline-danger mr-2" asp-controller="Home" asp-action="ChangeThemeMode">Сменить тему</a>
                     <ul class="navbar-nav flex-grow-1">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
                                 <a class="btn btn-outline-danger" asp-action="Personal" asp-controller="Account" asp-route-userName="@User.Identity.Name">Личный кабинет</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item ml-1 mr-1">
                                 <a class="btn btn-outline-danger" asp-action="Logout" asp-controller="Account">Выйти</a>
                             </li>
                             @if (User.IsInRole("admin"))

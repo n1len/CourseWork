@@ -9,321 +9,327 @@
 <div class="text-center">
     <a asp-controller="Account" asp-action="Personal" asp-route-userName="@Model.UserName">В личный кабинет</a>
 </div>
-<br/>
+<br />
 <div class="row">
-<div class="col">
-<form asp-action="Create" enctype="multipart/form-data">
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label asp-for="CustomCollection.Title" class="control-label"></label>
-            <input asp-for="CustomCollection.Title" class="form-control" />
-            <span asp-validation-for="CustomCollection.Title" class="text-danger"></span>
-        </div>
+    <div class="col">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CustomCollection.Title" class="control-label"></label>
+                        <input asp-for="CustomCollection.Title" class="form-control" />
+                        <span asp-validation-for="CustomCollection.Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CollectionImage" class="control-label">Загрузите изображение:</label>
+                        <span asp-validation-for="CollectionImage" class="text-danger"></span>
+                        <br />
+                        <input asp-for="CollectionImage" type="file" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CustomCollection.Description" class="control-label"></label>
+                        <textarea id="textarea" asp-for="CustomCollection.Description" class="form-control"></textarea>
+                        <span asp-validation-for="CustomCollection.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <select asp-for="CustomCollection.Topic" class="form-control" autocomplete="off">
+                            <option value="" selected="">Тема</option>
+                            <option value="Books">Книги</option>
+                            <option value="Alcohol">Алкоголь</option>
+                            <option value="Badges">Значки</option>
+                            <option value="Stamps">Марки</option>
+                            <option value="Others">Остальное</option>
+                        </select>
+                        <span asp-validation-for="CustomCollection.Topic" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-5">
+                    <p>Название поля:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsNumericField1Visible" /> Включить первое числовое поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.NumericField1" class="form-control" />
+                        <span asp-validation-for="CustomCollection.NumericField1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsNumericField2Visible" /> Включить второе числовое поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.NumericField2" class="form-control" />
+                        <span asp-validation-for="CustomCollection.NumericField2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsNumericField3Visible" /> Включить третье числовое поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.NumericField3" class="form-control" />
+                        <span asp-validation-for="CustomCollection.NumericField3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-5">
+                    <p>Название поля:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsOneLineField1Visible" /> Включить первое однострочное поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.OneLineField1" class="form-control" />
+                        <span asp-validation-for="CustomCollection.OneLineField1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsOneLineField2Visible" /> Включить второе однострочное поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.OneLineField2" class="form-control" />
+                        <span asp-validation-for="CustomCollection.OneLineField2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsOneLineField3Visible" /> Включить третье однострочное поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.OneLineField3" class="form-control" />
+                        <span asp-validation-for="CustomCollection.OneLineField3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-5">
+                    <p>Название поля:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsTextField1Visible" /> Включить первое текстовое поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.TextField1" class="form-control" />
+                        <span asp-validation-for="CustomCollection.TextField1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsTextField2Visible" /> Включить второе текстовое поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.TextField2" class="form-control" />
+                        <span asp-validation-for="CustomCollection.TextField2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsTextField3Visible" /> Включить третье текстовое поле?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.TextField3" class="form-control" />
+                        <span asp-validation-for="CustomCollection.TextField3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-5">
+                    <p>Название поля:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsDate1Visible" /> Включить первое поле с датой?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.Date1" class="form-control" />
+                        <span asp-validation-for="CustomCollection.Date1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsDate2Visible" /> Включить второе поле с датой?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.Date2" class="form-control" />
+                        <span asp-validation-for="CustomCollection.Date2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsDate3Visible" /> Включить третье поле с датой?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.Date3" class="form-control" />
+                        <span asp-validation-for="CustomCollection.Date3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-5">
+                    <p>Название поля:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsCheckBox1Visible" /> Включить первый checkbox?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.CheckBox1" class="form-control" />
+                        <span asp-validation-for="CustomCollection.CheckBox1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsCheckBox2Visible" /> Включить второй checkbox?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.CheckBox2" class="form-control" />
+                        <span asp-validation-for="CustomCollection.CheckBox2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="CustomCollection.IsCheckBox3Visible" /> Включить третий checkbox?
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <input asp-for="CustomCollection.CheckBox3" class="form-control" />
+                        <span asp-validation-for="CustomCollection.CheckBox3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group text-center">
+                <input type="submit" value="Создать коллекцию" class="btn btn-primary" asp-route-userName="@Model.UserName" />
+            </div>
+        </form>
     </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            <label asp-for="CollectionImage" class="control-label">Загрузите изображение:</label>
-            <span asp-validation-for="CollectionImage" class="text-danger"></span>
-            <br/>
-            <input asp-for="CollectionImage" type="file" />
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label asp-for="CustomCollection.Description" class="control-label"></label>
-            <input asp-for="CustomCollection.Description" class="form-control" />
-            <span asp-validation-for="CustomCollection.Description" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <select asp-for="CustomCollection.Topic" class="form-control" autocomplete="off">
-                <option value="" selected="">Тема</option>
-                <option value="Books">Книги</option>
-                <option value="Alcohol">Алкоголь</option>
-                <option value="Badges">Значки</option>
-                <option value="Stamps">Марки</option>
-                <option value="Others">Остальное</option>
-            </select>
-            <span asp-validation-for="CustomCollection.Topic" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="row">
-    <div class="col-sm-5">
-    </div>
-    <div class="col-sm-5">
-        <p>Название поля:</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsNumericField1Visible" /> Включить первое числовое поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.NumericField1" class="form-control" />
-            <span asp-validation-for="CustomCollection.NumericField1" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsNumericField2Visible" /> Включить второе числовое поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.NumericField2" class="form-control" />
-            <span asp-validation-for="CustomCollection.NumericField2" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsNumericField3Visible" /> Включить третье числовое поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.NumericField3" class="form-control" />
-            <span asp-validation-for="CustomCollection.NumericField3" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="row">
-    <div class="col-sm-5">
-    </div>
-    <div class="col-sm-5">
-        <p>Название поля:</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsOneLineField1Visible" /> Включить первое однострочное поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.OneLineField1" class="form-control" />
-            <span asp-validation-for="CustomCollection.OneLineField1" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsOneLineField2Visible" /> Включить второе однострочное поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.OneLineField2" class="form-control" />
-            <span asp-validation-for="CustomCollection.OneLineField2" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsOneLineField3Visible" /> Включить третье однострочное поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.OneLineField3" class="form-control" />
-            <span asp-validation-for="CustomCollection.OneLineField3" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="row">
-    <div class="col-sm-5">
-    </div>
-    <div class="col-sm-5">
-        <p>Название поля:</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsTextField1Visible" /> Включить первое текстовое поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.TextField1" class="form-control" />
-            <span asp-validation-for="CustomCollection.TextField1" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsTextField2Visible" /> Включить второе текстовое поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.TextField2" class="form-control" />
-            <span asp-validation-for="CustomCollection.TextField2" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsTextField3Visible" /> Включить третье текстовое поле?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.TextField3" class="form-control" />
-            <span asp-validation-for="CustomCollection.TextField3" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="row">
-    <div class="col-sm-5">
-    </div>
-    <div class="col-sm-5">
-        <p>Название поля:</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsDate1Visible" /> Включить первое поле с датой?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.Date1" class="form-control" />
-            <span asp-validation-for="CustomCollection.Date1" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsDate2Visible" /> Включить второе поле с датой?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.Date2" class="form-control" />
-            <span asp-validation-for="CustomCollection.Date2" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsDate3Visible" /> Включить третье поле с датой?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.Date3" class="form-control" />
-            <span asp-validation-for="CustomCollection.Date3" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="row">
-    <div class="col-sm-5">
-    </div>
-    <div class="col-sm-5">
-        <p>Название поля:</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsCheckBox1Visible" /> Включить первый checkbox?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.CheckBox1" class="form-control" />
-            <span asp-validation-for="CustomCollection.CheckBox1" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsCheckBox2Visible" /> Включить второй checkbox?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.CheckBox2" class="form-control" />
-            <span asp-validation-for="CustomCollection.CheckBox2" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-5">
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="CustomCollection.IsCheckBox3Visible" /> Включить третий checkbox?
-            </label>
-        </div>
-    </div>
-    <div class="col-sm-5">
-        <div class="form-group">
-            <input asp-for="CustomCollection.CheckBox3" class="form-control" />
-            <span asp-validation-for="CustomCollection.CheckBox3" class="text-danger"></span>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="form-group text-center">
-    <input type="submit" value="Создать коллекцию" class="btn btn-primary" asp-route-userName="@Model.UserName" />
-</div>
-</form>
-</div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/autosize.min.js"></script>
+<script type="text/javascript">
+    autosize($('#textarea'));
+</script>

@@ -249,9 +249,9 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h5><i>Добавить комментарий:</i></h5>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <div class="form-group">
-                    <input asp-for="Description" placeholder="Написать комментарий..." class="form-control" />
+                    <textarea id="textarea" asp-for="Description" placeholder="Написать комментарий..." class="form-control"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
@@ -271,3 +271,9 @@ else
         <h5><i>Возможность оставлять и лайкать комментарии/айтемы доступна только авторизованным пользователям</i></h5>
     </div>
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="~/js/autosize.min.js"></script>
+<script type="text/javascript">
+    autosize($('#textarea'));
+</script>

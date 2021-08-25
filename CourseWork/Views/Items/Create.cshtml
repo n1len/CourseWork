@@ -73,7 +73,7 @@
             {
                 <div class="form-group">
                     <label class="control-label">@Model.CustomCollection.TextField1</label>
-                    <input asp-for="Item.TextField1" name="item.TextField1" class="form-control" />
+                    <textarea id="textarea1" asp-for="Item.TextField1" name="item.TextField1" class="form-control"></textarea>
                     <span asp-validation-for="Item.TextField1" class="text-danger"></span>
                 </div>
             }
@@ -81,7 +81,7 @@
             {
                 <div class="form-group">
                     <label class="control-label">@Model.CustomCollection.TextField2</label>
-                    <input asp-for="Item.TextField2" name="item.TextField2" class="form-control" />
+                    <textarea id="textarea2" asp-for="Item.TextField2" name="item.TextField2" class="form-control"></textarea>
                     <span asp-validation-for="Item.TextField2" class="text-danger"></span>
                 </div>
             }
@@ -89,7 +89,7 @@
             {
                 <div class="form-group">
                     <label class="control-label">@Model.CustomCollection.TextField3</label>
-                    <input asp-for="Item.TextField3" name="item.TextField3" class="form-control" />
+                    <textarea id="textarea3" asp-for="Item.TextField3" name="item.TextField3" class="form-control"></textarea>
                     <span asp-validation-for="Item.TextField3" class="text-danger"></span>
                 </div>
             }
@@ -163,6 +163,7 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/autosize.min.js"></script>
 <script src='@Url.Content("https://unpkg.com/@yaireo/tagify")'></script>
 <script src='@Url.Content("https://unpkg.com/@yaireo/tagify/dist/tagify.polyfills.min.js")'></script>
 <link href=@Url.Content("https://unpkg.com/@yaireo/tagify/dist/tagify.css") rel="stylesheet" type="text/css" />
@@ -188,4 +189,7 @@
         $('#hiddenTags').val(str);
         return true;
     });
+    autosize($('#textarea1'));
+    autosize($('#textarea2'));
+    autosize($('#textarea3'));
 </script>

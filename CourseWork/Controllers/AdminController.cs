@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
 using CourseWork.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseWork.Controllers
 {
@@ -16,13 +18,15 @@ namespace CourseWork.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly ApplicationContext _context;
 
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,ApplicationContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public IActionResult UserList()
@@ -135,7 +139,17 @@ namespace CourseWork.Controllers
         {
             return await ChangeUsers(usersIds, async user =>
             {
-                await _userManager.DeleteAsync(user);
+                var deleteUser = await _context.Users.FirstOrDefaultAsync(u => u.UserName == user.UserName);
+                var likeOnItems = _context.LikeOnItem.Where(i => i.UserId == deleteUser.Id);
+                var likeOnComments = _context.LikeOnComment.Where(i => i.UserId == deleteUser.Id);
+                var collections = _context.CustomCollection.Where(i => i.UserId == deleteUser.Id);
+                var comments = _context.Comment.Where(i => i.UserId == deleteUser.Id);
+                _context.CustomCollection.RemoveRange(collections);
+                _context.Comment.RemoveRange(comments);
+                _context.LikeOnItem.RemoveRange(likeOnItems);
+                _context.LikeOnComment.RemoveRange(likeOnComments);
+                _context.Users.Remove(deleteUser);
+                await _context.SaveChangesAsync();
             });
         }
     }

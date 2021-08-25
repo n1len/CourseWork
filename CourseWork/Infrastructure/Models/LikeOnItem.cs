@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CourseWork.Infrastructure.Models
+﻿namespace CourseWork.Infrastructure.Models
 {
     public class LikeOnItem
     {

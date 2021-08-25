@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 using CourseWork.Data;
 using CourseWork.Infrastructure.Models;
 using CourseWork.ViewModels;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using AuthenticationManager = System.Net.AuthenticationManager;
 
 namespace CourseWork.Controllers
 {

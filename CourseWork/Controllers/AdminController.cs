@@ -139,15 +139,22 @@ namespace CourseWork.Controllers
         {
             return await ChangeUsers(usersIds, async user =>
             {
+                IQueryable<Item> items = null;
                 var deleteUser = await _context.Users.FirstOrDefaultAsync(u => u.UserName == user.UserName);
                 var likeOnItems = _context.LikeOnItem.Where(i => i.UserId == deleteUser.Id);
                 var likeOnComments = _context.LikeOnComment.Where(i => i.UserId == deleteUser.Id);
                 var collections = _context.CustomCollection.Where(i => i.UserId == deleteUser.Id);
                 var comments = _context.Comment.Where(i => i.UserId == deleteUser.Id);
-                _context.CustomCollection.RemoveRange(collections);
-                _context.Comment.RemoveRange(comments);
                 _context.LikeOnItem.RemoveRange(likeOnItems);
                 _context.LikeOnComment.RemoveRange(likeOnComments);
+                _context.Comment.RemoveRange(comments);
+                foreach (var collection in collections)
+                {
+                    items = _context.Item.Where(i => i.CustomCollectionId == collection.Id);
+                }
+                if(items != null)
+                    _context.Item.RemoveRange(items);
+                _context.CustomCollection.RemoveRange(collections);
                 _context.Users.Remove(deleteUser);
                 await _context.SaveChangesAsync();
             });

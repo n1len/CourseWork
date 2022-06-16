@@ -3,6 +3,12 @@
     "mssql1": {
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:ApplicationContextConnection"
+    },
+    "mssql2": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/carshopdbserver/databases/CourseWork_db",
+      "type": "mssql.azure",
+      "connectionId": "ApplicationContextConnection"
     }
   }
 }

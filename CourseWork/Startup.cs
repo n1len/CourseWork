@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using CourseWork.Infrastructure.Interfaces;
+using CourseWork.Infrastructure.Repositories;
 
 namespace CourseWork
 {
@@ -61,6 +63,8 @@ namespace CourseWork
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+éöóêåíãøùçõúôûâàïğîëäæıÿ÷ñìèòüáş¸ÉÖÓÊÅÍÃØÙÇÕÚÔÛÂÀÏĞÎËÄÆİß×ÑÌÈÒÜÁŞ¨ ";
                 options.User.RequireUniqueEmail = true;
             });
+            services.AddTransient<ICartRepository, CartRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddRazorPages();
             services.AddControllersWithViews();
         }

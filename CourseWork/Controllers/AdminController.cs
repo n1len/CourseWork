@@ -69,8 +69,6 @@ namespace CourseWork.Controllers
 
                 await _userManager.RemoveFromRolesAsync(user, removedRoles);
 
-                await _signInManager.RefreshSignInAsync(user);
-
                 return RedirectToAction("UserList");
             }
 

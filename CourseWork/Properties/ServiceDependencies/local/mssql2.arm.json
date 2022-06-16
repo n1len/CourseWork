@@ -4,7 +4,7 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "CourseWork20210824123027ResourceGroup",
+      "defaultValue": "CarShop_dbResourceGroup",
       "metadata": {
         "_parameterType": "resourceGroup",
         "description": "Имя группы ресурсов для ресурса. Рекомендуется поместить ресурсы в одну группу ресурсов для более удобного отслеживания."
@@ -12,7 +12,7 @@
     },
     "resourceGroupLocation": {
       "type": "string",
-      "defaultValue": "southcentralus",
+      "defaultValue": "eastus",
       "metadata": {
         "_parameterType": "location",
         "description": "Расположение группы ресурсов. Группы ресурсов и ресурсы могут находиться в различных расположениях."
@@ -51,7 +51,7 @@
             {
               "kind": "v12.0",
               "location": "[parameters('resourceLocation')]",
-              "name": "courseworkdbserver",
+              "name": "carshopdbserver",
               "type": "Microsoft.Sql/servers",
               "apiVersion": "2017-10-01-preview"
             },
@@ -63,11 +63,11 @@
               },
               "kind": "v12.0,user",
               "location": "[parameters('resourceLocation')]",
-              "name": "courseworkdbserver/CourseWork_db",
+              "name": "carshopdbserver/CourseWork_db",
               "type": "Microsoft.Sql/servers/databases",
               "apiVersion": "2017-10-01-preview",
               "dependsOn": [
-                "courseworkdbserver"
+                "carshopdbserver"
               ]
             }
           ]

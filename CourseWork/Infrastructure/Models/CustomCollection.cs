@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourseWork.Infrastructure.Models
 {
     public class CustomCollection
     {
+        [Key]
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Данное поле не может быть пустым.")]
+        [MaxLength(100, ErrorMessage = "Название коллекции не может быть больше 100 символов.")]
         [Display(Name = "Название коллекции:")]
         public string Title { get; set; }
 
@@ -51,6 +55,8 @@ namespace CourseWork.Infrastructure.Models
         public string CheckBox3 { get; set; }
         public ICollection<Item> Items { get; set; }
         public string UserId { get; set; }
+
+        [ForeignKey("UserId")]
         public User User { get; set; }
     }
 }
